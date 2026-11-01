@@ -1,0 +1,48 @@
+{
+ "code": "ar",
+ "country": "Argentina",
+ "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
+ "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261000_Octubre/261029_Informe Semanal al 29_10_2026.pdf",
+ "report_date": "2026-10-29",
+ "fetched_at": "2026-11-01T23:03:09+00:00",
+ "beta": true,
+ "notes": [
+  "Parsed from the weekly PDF – cross-check against the report if a number looks off.",
+  "Last year = same week of the previous campaign. No 5-yr average published."
+ ],
+ "rows": [
+  {
+   "crop": "Rice",
+   "crop_local": "Arroz",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 72.0,
+   "prev_week": 67.0,
+   "last_year": 62.0,
+   "avg5": null
+  },
+  {
+   "crop": "Sunflower",
+   "crop_local": "Girasol",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 55.0,
+   "prev_week": 49.0,
+   "last_year": 60.0,
+   "avg5": null
+  },
+  {
+   "crop": "Corn",
+   "crop_local": "Maiz",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 37.0,
+   "prev_week": 35.0,
+   "last_year": 36.0,
+   "avg5": null
+  }
+ ]
+}

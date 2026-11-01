@@ -1,0 +1,16 @@
+report_date,crop,season,region,metric,current,last_year,avg5
+2026-10-25,"Corn, Grain",,United States,harvested,60.0,,
+2026-10-25,"Cotton, Upland",,United States,bolls opening,89.0,67.0,89.4
+2026-10-25,"Cotton, Upland",,United States,harvested,52.0,,
+2026-10-25,Peanuts,,United States,harvested,51.0,,
+2026-10-25,Sorghum,,United States,mature,93.0,61.0,88.6
+2026-10-25,"Sorghum, Grain",,United States,harvested,56.0,,
+2026-10-25,Soybeans,,United States,harvested,79.0,,
+2026-10-25,Sugarbeets,,United States,harvested,75.0,,
+2026-10-25,Sunflower,,United States,harvested,46.0,,
+2026-10-25,"Wheat, Winter",,United States,emerged,53.0,,
+2026-10-25,"Wheat, Winter",,United States,planted,76.0,,
+2026-10-25,Corn,,United States,condition_ge,56.0,,
+2026-10-25,"Cotton, Upland",,United States,condition_ge,33.0,,
+2026-10-25,Pastureland,,United States,condition_ge,23.0,,
+2026-10-25,Peanuts,,United States,condition_ge,50.0,,

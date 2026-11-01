@@ -1,0 +1,208 @@
+{
+ "code": "us",
+ "country": "United States",
+ "source": "USDA NASS Crop Progress",
+ "source_url": "https://www.nass.usda.gov/Publications/National_Crop_Progress/",
+ "report_date": "2026-10-25",
+ "fetched_at": "2026-11-01T23:02:38+00:00",
+ "beta": false,
+ "notes": [
+  "Week-ending date shown. Last year / 5-yr avg matched to the same calendar week.",
+  "Condition = % Good + Excellent."
+ ],
+ "rows": [
+  {
+   "crop": "Corn, Grain",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 60.0,
+   "prev_week": 44.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Cotton, Upland",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "bolls opening",
+   "current": 89.0,
+   "prev_week": 85.0,
+   "last_year": 67.0,
+   "avg5": 89.4
+  },
+  {
+   "crop": "Cotton, Upland",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 52.0,
+   "prev_week": 41.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Peanuts",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 51.0,
+   "prev_week": 39.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Sorghum",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "mature",
+   "current": 93.0,
+   "prev_week": 87.0,
+   "last_year": 61.0,
+   "avg5": 88.6
+  },
+  {
+   "crop": "Sorghum, Grain",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 56.0,
+   "prev_week": 46.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Soybeans",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 79.0,
+   "prev_week": 64.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Sugarbeets",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 75.0,
+   "prev_week": 55.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Sunflower",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 46.0,
+   "prev_week": 24.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Wheat, Winter",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "emerged",
+   "current": 53.0,
+   "prev_week": 39.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Wheat, Winter",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "planted",
+   "current": 76.0,
+   "prev_week": 63.0,
+   "last_year": null,
+   "avg5": null
+  },
+  {
+   "crop": "Corn",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "condition_ge",
+   "current": 56.0,
+   "prev_week": 56.0,
+   "last_year": null,
+   "avg5": null,
+   "dist": {
+    "ex": 13.0,
+    "fr": 26.0,
+    "gd": 43.0,
+    "pr": 12.0,
+    "vp": 6.0
+   }
+  },
+  {
+   "crop": "Cotton, Upland",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "condition_ge",
+   "current": 33.0,
+   "prev_week": 35.0,
+   "last_year": null,
+   "avg5": null,
+   "dist": {
+    "ex": 6.0,
+    "fr": 30.0,
+    "gd": 27.0,
+    "pr": 24.0,
+    "vp": 13.0
+   }
+  },
+  {
+   "crop": "Pastureland",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "condition_ge",
+   "current": 23.0,
+   "prev_week": 23.0,
+   "last_year": null,
+   "avg5": null,
+   "dist": {
+    "ex": 4.0,
+    "fr": 33.0,
+    "gd": 19.0,
+    "pr": 26.0,
+    "vp": 18.0
+   }
+  },
+  {
+   "crop": "Peanuts",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "condition_ge",
+   "current": 50.0,
+   "prev_week": 52.0,
+   "last_year": null,
+   "avg5": null,
+   "dist": {
+    "ex": 6.0,
+    "fr": 34.0,
+    "gd": 44.0,
+    "pr": 14.0,
+    "vp": 2.0
+   }
+  }
+ ]
+}

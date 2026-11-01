@@ -1,0 +1,99 @@
+{
+ "code": "fr",
+ "country": "France",
+ "source": "FranceAgriMer Céré'Obs",
+ "source_url": "https://cereobs.franceagrimer.fr/cereobs-sp/",
+ "report_date": "2026-10-26",
+ "fetched_at": "2026-11-01T23:03:05+00:00",
+ "beta": false,
+ "notes": [
+  "Week-ending date shown (Céré'Obs publishes Fridays).",
+  "Condition = % Bonnes + Très bonnes (good + excellent). Céré'Obs stops updating a region's condition once its harvest passes 50%."
+ ],
+ "rows": [
+  {
+   "crop": "Soft wheat",
+   "crop_local": "Blé tendre",
+   "season": null,
+   "region": "France",
+   "metric": "de",
+   "current": 62.0,
+   "prev_week": 45.0,
+   "last_year": 67.0,
+   "avg5": 59.0
+  },
+  {
+   "crop": "Soft wheat",
+   "crop_local": "Blé tendre",
+   "season": null,
+   "region": "France",
+   "metric": "de",
+   "current": 28.0,
+   "prev_week": 6.0,
+   "last_year": 36.0,
+   "avg5": 31.0
+  },
+  {
+   "crop": "Winter barley",
+   "crop_local": "Orge d'hiver",
+   "season": null,
+   "region": "France",
+   "metric": "de",
+   "current": 71.0,
+   "prev_week": 55.0,
+   "last_year": 79.0,
+   "avg5": 74.0
+  },
+  {
+   "crop": "Winter barley",
+   "crop_local": "Orge d'hiver",
+   "season": null,
+   "region": "France",
+   "metric": "de",
+   "current": 37.0,
+   "prev_week": 11.0,
+   "last_year": 54.0,
+   "avg5": 46.0
+  },
+  {
+   "crop": "Durum wheat",
+   "crop_local": "Blé dur",
+   "season": null,
+   "region": "France",
+   "metric": "planted",
+   "current": 4.0,
+   "prev_week": 2.0,
+   "last_year": 9.0,
+   "avg5": 8.0
+  },
+  {
+   "crop": "Grain corn",
+   "crop_local": "Maïs grain",
+   "season": null,
+   "region": "France",
+   "metric": "de",
+   "current": 99.0,
+   "prev_week": 97.0,
+   "last_year": 81.0,
+   "avg5": 71.0
+  },
+  {
+   "crop": "Grain corn",
+   "crop_local": "Maïs grain",
+   "season": null,
+   "region": "France",
+   "metric": "condition_ge",
+   "current": 22.0,
+   "prev_week": 22.0,
+   "last_year": 59.0,
+   "avg5": null,
+   "dist": {
+    "vp": 21.0,
+    "pr": 30.0,
+    "fr": 27.0,
+    "gd": 21.0,
+    "ex": 1.0
+   }
+  }
+ ]
+}
