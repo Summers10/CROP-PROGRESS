@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 
-from .common import payload, rec, session, validate
+from common import payload, rec, session, validate
 
 BASE = "https://cereobs.franceagrimer.fr/cereobs-sp/api/public/"
 SITE = "https://cereobs.franceagrimer.fr/cereobs-sp/"

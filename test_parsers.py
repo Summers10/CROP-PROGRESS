@@ -3,7 +3,7 @@ import csv
 import io
 from datetime import date, timedelta
 
-from fetchers import ar_magyp, br_conab, fr_cereobs, us_nass
+import ar_magyp, br_conab, fr_cereobs, us_nass
 
 # ---------- Brazil: CONAB xlsx (column A empty, data from column B) ----------
 CONAB = [

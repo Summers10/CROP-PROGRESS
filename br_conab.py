@@ -8,7 +8,7 @@ import io
 import re
 from datetime import date, datetime, timedelta
 
-from .common import payload, rec, session, validate
+from common import payload, rec, session, validate
 
 INDEX = "https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/progresso-de-safra"
 

@@ -6,8 +6,8 @@ import json
 import sys
 import traceback
 
-from fetchers import ar_magyp, br_conab, fr_cereobs, us_nass
-from fetchers.common import DATA, now_iso, write_country
+import ar_magyp, br_conab, fr_cereobs, us_nass
+from common import DATA, now_iso, write_country
 
 SOURCES = {"us": us_nass, "br": br_conab, "fr": fr_cereobs, "ar": ar_magyp}
 

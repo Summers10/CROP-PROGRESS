@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 
-from .common import env, payload, rec, session, validate
+from common import env, payload, rec, session, validate
 
 API = "https://quickstats.nass.usda.gov/api/api_GET/"
 SOURCE_URL = "https://www.nass.usda.gov/Publications/National_Crop_Progress/"

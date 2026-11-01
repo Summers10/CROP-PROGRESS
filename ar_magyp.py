@@ -9,7 +9,7 @@ import io
 import re
 from datetime import date, datetime
 
-from .common import payload, rec, session, validate
+from common import payload, rec, session, validate
 
 LIST = "https://www.magyp.gob.ar/sitio/areas/estimaciones/estimaciones/informes/"
 BASE = "https://www.magyp.gob.ar"
