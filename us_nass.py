@@ -64,9 +64,15 @@ def _nearest(series: dict[date, float], target: date, tol_days=4, fill=False):
         return best[1] if best else None
     before = [d for d in series if target - timedelta(days=70) <= d < target]
     after = [d for d in series if target < d <= target + timedelta(days=70)]
-    if before and not after:
+    if before and after:          # gap in reporting (e.g. Oct-Nov 2025 shutdown): interpolate
+        b, a = max(before), min(after)
+        w = (target - b).days / (a - b).days
+        return series[b] + w * (series[a] - series[b])
+    if fill == "interp":
+        return None
+    if before:                    # season finished, reporting stopped -> carry last value
         return series[max(before)]
-    if after and not before:
+    if after:                     # season not started yet that year
         return 0.0
     return None
 
@@ -108,7 +114,7 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
         ly = _nearest(series, latest - timedelta(days=364), fill=True)
         hist = [_nearest(series, latest - timedelta(days=364 * k), fill=True) for k in range(1, 6)]
         hist = [h for h in hist if h is not None]
-        avg5 = sum(hist) / len(hist) if len(hist) == 5 else None
+        avg5 = sum(hist) / len(hist) if len(hist) >= 3 else None
         out.append(rec(crop, stage, cur, prev_week=prev, last_year=ly, avg5=avg5, region="United States"))
 
     def ge(d):
@@ -120,10 +126,10 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
         cur = weeks[latest]
         series_ge = {w: ge(d) for w, d in weeks.items()}
         prev = _nearest(series_ge, latest - timedelta(days=7), 1)
-        ly = _nearest(series_ge, latest - timedelta(days=364))
-        hist = [_nearest(series_ge, latest - timedelta(days=364 * k)) for k in range(1, 6)]
+        ly = _nearest(series_ge, latest - timedelta(days=364), fill="interp")
+        hist = [_nearest(series_ge, latest - timedelta(days=364 * k), fill="interp") for k in range(1, 6)]
         hist = [h for h in hist if h is not None]
-        avg5 = sum(hist) / len(hist) if len(hist) == 5 else None
+        avg5 = sum(hist) / len(hist) if len(hist) >= 3 else None
         out.append(rec(crop, "condition_ge", ge(cur), prev_week=prev, last_year=ly, avg5=avg5,
                        region="United States", dist=cur))
     return latest.isoformat(), out
@@ -142,4 +148,5 @@ def fetch() -> dict:
     validate(rows, min_rows=2)
     return payload("us", "United States", "USDA NASS Crop Progress", SOURCE_URL, report_date, rows,
                    notes=["Week-ending date shown. Last year / 5-yr avg matched to the same calendar week.",
+                          "Weeks missing from past years (e.g. the Oct-Nov 2025 shutdown) are linearly interpolated.",
                           "Condition = % Good + Excellent."])

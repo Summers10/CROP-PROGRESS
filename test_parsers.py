@@ -47,6 +47,7 @@ Blé tendre-Semis-France,,,,,,
  %","Moyenne  2021 - 2025
  %",,
 Bretagne,14,2,21,17,,
+Ile-de-France,75,25,65,69,,
 Moyenne France,62,45,67,59,,
 """
 FR_COND = """Conditions culture
@@ -148,3 +149,14 @@ def test_nass_fill_after_season_end():
            _qs("SOYBEANS", "PCT HARVESTED", latest - timedelta(364 + 14), 100)]
     _, rows = us_nass.parse(raw)
     assert rows[0]["last_year"] == 100
+
+
+def test_nass_interpolates_shutdown_gap():
+    # no report for last year's matching week; reports 3 weeks before (40) and 3 weeks after (70)
+    latest = date(2026, 10, 25)
+    ly = latest - timedelta(364)
+    raw = [_qs("CORN, GRAIN", "PCT HARVESTED", latest, 60),
+           _qs("CORN, GRAIN", "PCT HARVESTED", ly - timedelta(21), 40),
+           _qs("CORN, GRAIN", "PCT HARVESTED", ly + timedelta(21), 70)]
+    _, rows = us_nass.parse(raw)
+    assert rows[0]["last_year"] == 55

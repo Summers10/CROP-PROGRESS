@@ -92,7 +92,9 @@ def latest_xlsx_url(s) -> str:
         links = re.findall(r'href="([^"]*plantio[^"]*\.xlsx[^"]*)"', page.text, re.I)
         if links:
             url = links[0]
-            return url if url.startswith("http") else folder.rstrip("/") + "/" + url.lstrip("/")
+            url = url if url.startswith("http") else folder.rstrip("/") + "/" + url.lstrip("/")
+            # Plone links point at a "/view" page; the file itself is at the bare .xlsx URL
+            return re.sub(r"(\.xlsx)/(view|@@.*)$", r"\1", url, flags=re.I)
     raise RuntimeError("no 'plantio e colheita' xlsx found in recent CONAB folders")
 
 
@@ -103,6 +105,11 @@ def fetch() -> dict:
     url = latest_xlsx_url(s)
     r = s.get(url, timeout=90)
     r.raise_for_status()
+    if not r.content.startswith(b"PK"):           # got an HTML page, try Plone's download view
+        r = s.get(url + "/@@download/file", timeout=90)
+        r.raise_for_status()
+        if not r.content.startswith(b"PK"):
+            raise RuntimeError(f"CONAB link is not an xlsx file: {url}")
     wb = openpyxl.load_workbook(io.BytesIO(r.content), data_only=True, read_only=True)
     ws = wb.worksheets[0]
     grid = [list(row) for row in ws.iter_rows(values_only=True)]

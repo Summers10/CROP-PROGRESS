@@ -36,7 +36,7 @@ def parse_stage(grid) -> tuple[str, dict]:
     stage, cols = None, None
     for row in grid:
         a = _s(row[0]) if row else ""
-        if a.endswith("-France") and a.count("-") >= 2:
+        if stage is None and a.endswith("-France") and a.count("-") >= 2 and not a.lower().startswith("ile-de"):
             stage = a.rsplit("-", 2)[1].strip().lower()
         heads = [_s(c).lower() for c in row]
         if any(h.startswith("moyenne") and re.search(r"\d{4}\s*-\s*\d{4}", h) for h in heads):
