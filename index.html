@@ -37,16 +37,6 @@ body.light{
   font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .theme-btn.active{background:#f5a623;color:#000}
 
-/* selectors */
-#controls{padding:12px 20px;border-bottom:1px solid var(--amber);background:var(--bg);display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;
-  position:sticky;top:0;z-index:5}
-.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ctl-label{font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--text3);text-transform:uppercase}
-.toggle{display:flex;flex-wrap:wrap;border:1px solid var(--border2);border-radius:3px;overflow:hidden}
-.tbtn{padding:7px 13px;background:none;border:none;color:var(--text3);cursor:pointer;font-family:inherit;font-size:13px;
-  font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.tbtn.active{background:var(--amber);color:#000}
-.tbtn:hover:not(.active){color:var(--amber)}
 
 .root{max-width:1300px;margin:0 auto;padding:22px}
 
@@ -54,7 +44,7 @@ body.light{
 .health{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:var(--text3);margin-bottom:22px}
 .health b{color:var(--text);letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
 
-.panel{border-bottom:2px solid var(--amber);margin-bottom:8px;overflow:hidden}
+.panel{border-bottom:2px solid var(--amber);margin-bottom:24px;overflow:hidden}
 .panel-hdr{padding:9px 16px;background:var(--bg1);border:1px solid var(--border);border-bottom:none;border-top:3px solid var(--amber);
   display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
 .panel-title{font-size:16px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--amber)}
@@ -87,14 +77,12 @@ body.light{
 
 .tag{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.08em;padding:1px 6px;border:1px solid;text-transform:uppercase;vertical-align:middle}
 .tag.ok{color:var(--green)} .tag.stale{color:var(--amber)} .tag.fail{color:var(--red)} .tag.beta{color:var(--text3)}
-.notes{font-size:12px;color:var(--text3);padding:4px 2px 30px;line-height:1.5}
 .empty{padding:18px 16px;color:var(--text3);font-size:14px;border:1px solid var(--border2);border-top:none}
-.legend{font-size:12px;color:var(--text3);line-height:1.6}
+.legend{font-size:12px;color:var(--text3);line-height:1.7;border-top:1px solid var(--border2);padding-top:10px;margin-top:8px}
 
 @media (max-width:640px){
   body{font-size:15px}
   .root{padding:14px}
-  #controls{padding:10px 14px;position:static}
   #bar .meta{display:none}
 }
 </style>
@@ -105,10 +93,6 @@ body.light{
   <h1>Crop Progress</h1>
   <span class="meta" id="lastrun">loading…</span>
   <div class="theme-toggle" id="theme"></div>
-</div>
-<div id="controls">
-  <div class="ctl"><span class="ctl-label">Country</span><div class="toggle" id="country-toggle"></div></div>
-  <div class="ctl"><span class="ctl-label">Crop</span><div class="toggle" id="crop-toggle"></div></div>
 </div>
 <div class="root" id="root"></div>
 
@@ -126,7 +110,7 @@ const METRIC_ORDER = ["planted", "emerged", "harvested", "condition_ge"];
 const METRIC_LABEL = { condition_ge: "Condition G/E", planted: "Planted", emerged: "Emerged", harvested: "Harvested" };
 
 let DATA = {}, STATUS = {}, LAST_RUN = null;
-let STATE = { country: "all", crop: "all", theme: "light" };
+let STATE = { theme: "light" };
 
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -204,7 +188,7 @@ function countryPanel(c) {
   }
   const rows = d.rows
     .map(r => ({ ...r, _g: cropGroup(r.crop), _label: cropLabel(r.crop) }))
-    .filter(r => r._g && (STATE.crop === "all" || r._g === STATE.crop))
+    .filter(r => r._g)
     .sort((a, b) => CROPS.indexOf(a._g) - CROPS.indexOf(b._g) || a._label.localeCompare(b._label)
       || mi(a.metric) - mi(b.metric));
   let body = "", last = null;
@@ -218,10 +202,8 @@ function countryPanel(c) {
   }
   const table = rows.length
     ? `<div class="tbl-wrap"><table class="cp-table">${HEAD}${body}</table></div>`
-    : `<div class="empty">No ${STATE.crop === "all" ? "wheat, corn, canola, soybean or cotton" : STATE.crop.toLowerCase()} series in this week's report.</div>`;
-  const notes = (d.notes || []).map(n => `· ${esc(n)}`).join("<br>");
-  return `<div class="panel">${hdr(`${esc(d.source)} · week ending ${esc(d.report_date)}`, d.source_url)}${table}</div>
-    <div class="notes">${notes}</div>`;
+    : `<div class="empty">No wheat, corn, canola, soybean or cotton series in this week's report.</div>`;
+  return `<div class="panel">${hdr(`${esc(d.source)} · week ending ${esc(d.report_date)}`, d.source_url)}${table}</div>`;
 }
 
 function render() {
@@ -229,24 +211,19 @@ function render() {
     `<button class="theme-btn ${t === STATE.theme ? "active" : ""}" data-t="${t}">${t}</button>`).join("");
 
   const live = COUNTRIES.filter(c => DATA[c.code] || STATUS[c.code]);
-  document.getElementById("country-toggle").innerHTML = [["all", "All"], ...live.map(c => [c.code, c.short])]
-    .map(([k, l]) => `<button class="tbtn ${k === STATE.country ? "active" : ""}" data-country="${k}">${l}</button>`).join("");
-  document.getElementById("crop-toggle").innerHTML = [["all", "All"], ...CROPS.map(c => [c, c])]
-    .map(([k, l]) => `<button class="tbtn ${k === STATE.crop ? "active" : ""}" data-crop="${k}">${l}</button>`).join("");
 
   const health = live.map(c => {
     const d = DATA[c.code];
     return `<span><b>${c.short}</b>${d ? esc(d.report_date) : "–"} ${badge(c.code)}</span>`;
   }).join("");
 
-  const shown = live.filter(c => STATE.country === "all" || c.code === STATE.country);
-  const canolaNote = (STATE.crop === "all" || STATE.crop === "Canola")
-    ? "Canola: none of the current sources report canola progress. Canada's provincial crop reports (planned) will cover it." : "";
   document.getElementById("root").innerHTML =
     `<div class="health">${health}</div>` +
-    (shown.length ? shown.map(countryPanel).join("") : '<div class="empty">No data yet — run the workflow.</div>') +
-    `<p class="legend">Values are % of area (condition = % good + excellent). Δ in percentage points.
-      Bar = this week; amber tick = 5-yr avg (or last year where no average is published).${canolaNote ? "<br>" + canolaNote : ""}</p>`;
+    (live.length ? live.map(countryPanel).join("") : '<div class="empty">No data yet — run the workflow.</div>') +
+    `<footer class="legend">
+      <p>% of area · Condition = % good + excellent · Δ in pct points · Amber tick = 5-yr avg (or last year)</p>
+      <p>US: 2025 shutdown weeks interpolated · Argentina: read from PDF (beta) · Canola: no source yet</p>
+    </footer>`;
 
   document.getElementById("lastrun").textContent = LAST_RUN ? `last run ${LAST_RUN} UTC` : "no runs yet";
 }
@@ -261,8 +238,6 @@ document.addEventListener("click", e => {
   const b = e.target.closest("button");
   if (!b) return;
   if (b.dataset.t) setTheme(b.dataset.t);
-  else if (b.dataset.country) STATE.country = b.dataset.country;
-  else if (b.dataset.crop) STATE.crop = b.dataset.crop;
   else return;
   store.set("cpt-state", JSON.stringify(STATE));
   render();
@@ -278,7 +253,6 @@ document.addEventListener("click", e => {
   await Promise.all(COUNTRIES.map(async c => { const d = await get(`data/${c.code}.json`); if (d) DATA[c.code] = d; }));
   const times = Object.values(STATUS).map(s => s.last_attempt).filter(Boolean).sort();
   LAST_RUN = times.length ? times.at(-1).slice(0, 16).replace("T", " ") : null;
-  if (STATE.country !== "all" && !DATA[STATE.country] && !STATUS[STATE.country]) STATE.country = "all";
   render();
 })();
 </script>
