@@ -1,0 +1,81 @@
+{
+ "code": "br",
+ "country": "Brazil",
+ "source": "CONAB Progresso de Safra",
+ "source_url": "https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/progresso-de-safra/acompanhamento-das-lavouras-19-10-a-25-10-26/plantio-e-colheita-17-10-a-23-10.xlsx",
+ "report_date": "2026-10-23",
+ "fetched_at": "2026-11-01T23:20:55+00:00",
+ "beta": false,
+ "notes": [
+  "National = sum of the main producing states listed by CONAB.",
+  "Harvest % is relative to area planted to date."
+ ],
+ "rows": [
+  {
+   "crop": "Rice",
+   "crop_local": "Arroz",
+   "season": "2026/27",
+   "region": "Brazil (6 estados)",
+   "metric": "planted",
+   "current": 38.2,
+   "prev_week": 33.2,
+   "last_year": 49.5,
+   "avg5": 46.8
+  },
+  {
+   "crop": "Rice",
+   "crop_local": "Arroz",
+   "season": "2026/27",
+   "region": "Brazil (6 estados)",
+   "metric": "harvested",
+   "current": 0.2,
+   "prev_week": 0.0,
+   "last_year": 0.0,
+   "avg5": 0.0
+  },
+  {
+   "crop": "Dry beans (1st)",
+   "crop_local": "Feijão 1ª",
+   "season": "2026/27",
+   "region": "Brazil (8 estados)",
+   "metric": "planted",
+   "current": 25.1,
+   "prev_week": 20.9,
+   "last_year": 24.5,
+   "avg5": 26.7
+  },
+  {
+   "crop": "Corn (1st crop)",
+   "crop_local": "Milho 1ª",
+   "season": "2026/27",
+   "region": "Brazil (9 estados)",
+   "metric": "planted",
+   "current": 40.0,
+   "prev_week": 36.0,
+   "last_year": 39.5,
+   "avg5": 38.9
+  },
+  {
+   "crop": "Soybeans",
+   "crop_local": "Soja",
+   "season": "2026/27",
+   "region": "Brazil (12 estados)",
+   "metric": "planted",
+   "current": 42.8,
+   "prev_week": 30.1,
+   "last_year": 34.8,
+   "avg5": 40.2
+  },
+  {
+   "crop": "Wheat",
+   "crop_local": "Trigo",
+   "season": "2026",
+   "region": "Brazil (8 estados)",
+   "metric": "harvested",
+   "current": 57.3,
+   "prev_week": 45.5,
+   "last_year": 43.2,
+   "avg5": 52.7
+  }
+ ]
+}
