@@ -2,9 +2,9 @@
  "code": "br",
  "country": "Brazil",
  "source": "CONAB Progresso de Safra",
- "source_url": "https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/progresso-de-safra/acompanhamento-das-lavouras-19-10-a-25-10-26/plantio-e-colheita-17-10-a-23-10.xlsx",
- "report_date": "2026-10-23",
- "fetched_at": "2026-11-01T23:20:55+00:00",
+ "source_url": "https://www.gov.br/conab/pt-br/atuacao/informacoes-agropecuarias/safras/progresso-de-safra/acompanhamento-das-lavouras-26-10-a-01-11-26/plantio-e-colheita-24-10-a-30-10.xlsx",
+ "report_date": "2026-10-30",
+ "fetched_at": "2026-11-02T22:21:42+00:00",
  "beta": false,
  "notes": [
   "National = sum of the main producing states listed by CONAB.",
@@ -17,10 +17,10 @@
    "season": "2026/27",
    "region": "Brazil (6 estados)",
    "metric": "planted",
-   "current": 38.2,
-   "prev_week": 33.2,
-   "last_year": 49.5,
-   "avg5": 46.8
+   "current": 50.9,
+   "prev_week": 38.2,
+   "last_year": 57.8,
+   "avg5": 57.0
   },
   {
    "crop": "Rice",
@@ -29,7 +29,7 @@
    "region": "Brazil (6 estados)",
    "metric": "harvested",
    "current": 0.2,
-   "prev_week": 0.0,
+   "prev_week": 0.2,
    "last_year": 0.0,
    "avg5": 0.0
   },
@@ -39,10 +39,10 @@
    "season": "2026/27",
    "region": "Brazil (8 estados)",
    "metric": "planted",
-   "current": 25.1,
-   "prev_week": 20.9,
-   "last_year": 24.5,
-   "avg5": 26.7
+   "current": 33.5,
+   "prev_week": 25.1,
+   "last_year": 34.4,
+   "avg5": 33.4
   },
   {
    "crop": "Corn (1st crop)",
@@ -50,10 +50,10 @@
    "season": "2026/27",
    "region": "Brazil (9 estados)",
    "metric": "planted",
-   "current": 40.0,
-   "prev_week": 36.0,
-   "last_year": 39.5,
-   "avg5": 38.9
+   "current": 44.2,
+   "prev_week": 40.0,
+   "last_year": 42.3,
+   "avg5": 42.5
   },
   {
    "crop": "Soybeans",
@@ -61,10 +61,10 @@
    "season": "2026/27",
    "region": "Brazil (12 estados)",
    "metric": "planted",
-   "current": 42.8,
-   "prev_week": 30.1,
-   "last_year": 34.8,
-   "avg5": 40.2
+   "current": 54.3,
+   "prev_week": 42.8,
+   "last_year": 47.7,
+   "avg5": 51.8
   },
   {
    "crop": "Wheat",
@@ -72,10 +72,10 @@
    "season": "2026",
    "region": "Brazil (8 estados)",
    "metric": "harvested",
-   "current": 57.3,
-   "prev_week": 45.5,
-   "last_year": 43.2,
-   "avg5": 52.7
+   "current": 66.9,
+   "prev_week": 57.3,
+   "last_year": 50.8,
+   "avg5": 60.3
   }
  ]
 }
