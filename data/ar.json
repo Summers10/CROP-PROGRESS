@@ -4,7 +4,7 @@
  "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
  "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261000_Octubre/261029_Informe Semanal al 29_10_2026.pdf",
  "report_date": "2026-10-29",
- "fetched_at": "2026-11-03T03:30:07+00:00",
+ "fetched_at": "2026-11-03T20:11:14+00:00",
  "beta": true,
  "notes": [
   "Parsed from the weekly PDF – cross-check against the report if a number looks off.",
