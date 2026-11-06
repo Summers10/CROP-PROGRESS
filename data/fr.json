@@ -3,8 +3,8 @@
  "country": "France",
  "source": "FranceAgriMer Céré'Obs",
  "source_url": "https://cereobs.franceagrimer.fr/cereobs-sp/",
- "report_date": "2026-10-26",
- "fetched_at": "2026-11-06T02:32:45+00:00",
+ "report_date": "2026-11-02",
+ "fetched_at": "2026-11-06T19:58:48+00:00",
  "beta": false,
  "notes": [
   "Week-ending date shown (Céré'Obs publishes Fridays).",
@@ -17,10 +17,10 @@
    "season": null,
    "region": "France",
    "metric": "planted",
-   "current": 62.0,
-   "prev_week": 45.0,
-   "last_year": 67.0,
-   "avg5": 59.0
+   "current": 84.0,
+   "prev_week": 62.0,
+   "last_year": 77.0,
+   "avg5": 73.0
   },
   {
    "crop": "Soft wheat",
@@ -28,10 +28,21 @@
    "season": null,
    "region": "France",
    "metric": "emerged",
-   "current": 28.0,
-   "prev_week": 6.0,
-   "last_year": 36.0,
-   "avg5": 31.0
+   "current": 48.0,
+   "prev_week": 28.0,
+   "last_year": 53.0,
+   "avg5": 49.0
+  },
+  {
+   "crop": "Soft wheat",
+   "crop_local": "Blé tendre",
+   "season": null,
+   "region": "France",
+   "metric": "tillering",
+   "current": 1.0,
+   "prev_week": 0.0,
+   "last_year": 1.0,
+   "avg5": 2.0
   },
   {
    "crop": "Winter barley",
@@ -39,10 +50,10 @@
    "season": null,
    "region": "France",
    "metric": "planted",
-   "current": 71.0,
-   "prev_week": 55.0,
-   "last_year": 79.0,
-   "avg5": 74.0
+   "current": 89.0,
+   "prev_week": 72.0,
+   "last_year": 86.0,
+   "avg5": 84.0
   },
   {
    "crop": "Winter barley",
@@ -50,10 +61,21 @@
    "season": null,
    "region": "France",
    "metric": "emerged",
-   "current": 37.0,
-   "prev_week": 11.0,
-   "last_year": 54.0,
-   "avg5": 46.0
+   "current": 60.0,
+   "prev_week": 37.0,
+   "last_year": 71.0,
+   "avg5": 66.0
+  },
+  {
+   "crop": "Winter barley",
+   "crop_local": "Orge d'hiver",
+   "season": null,
+   "region": "France",
+   "metric": "tillering",
+   "current": 1.0,
+   "prev_week": 0.0,
+   "last_year": 2.0,
+   "avg5": 4.0
   },
   {
    "crop": "Durum wheat",
@@ -61,10 +83,21 @@
    "season": null,
    "region": "France",
    "metric": "planted",
-   "current": 4.0,
-   "prev_week": 2.0,
-   "last_year": 9.0,
-   "avg5": 8.0
+   "current": 24.0,
+   "prev_week": 4.0,
+   "last_year": 23.0,
+   "avg5": 20.0
+  },
+  {
+   "crop": "Durum wheat",
+   "crop_local": "Blé dur",
+   "season": null,
+   "region": "France",
+   "metric": "emerged",
+   "current": 1.0,
+   "prev_week": 0.0,
+   "last_year": 4.0,
+   "avg5": 3.0
   },
   {
    "crop": "Grain corn",
@@ -72,10 +105,10 @@
    "season": null,
    "region": "France",
    "metric": "harvested",
-   "current": 99.0,
-   "prev_week": 97.0,
-   "last_year": 81.0,
-   "avg5": 71.0
+   "current": 100.0,
+   "prev_week": 99.0,
+   "last_year": 89.0,
+   "avg5": 81.0
   },
   {
    "crop": "Grain corn",
