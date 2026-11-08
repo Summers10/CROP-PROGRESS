@@ -61,15 +61,28 @@ python -m http.server  # then open http://localhost:8000
   or another crop stage name.
 - `condition_ge` rows also carry `dist`, the full condition breakdown:
   `vp` (very poor), `pr` (poor), `fr` (fair), `gd` (good), `ex` (excellent).
+- `quality` maps a column to `"interpolated"` when that figure was linearly filled. It is
+  omitted when every figure is observed.
+- `avg5_ex_interp` and `avg5_ex_interp_n` are present only when the 5-year average used an
+  interpolated year. The value is null when fewer than three non-interpolated years remain.
+- Rows read from a PDF also carry `source_document` (URL), `source_page`, and `source_label`.
 
 ## Notes on comparisons
 
-- **US:** NASS doesn't publish the 5-yr average through the API. It is calculated here from
+- **US:** NASS doesn't publish the 5-year average through the API. It is calculated here from
   history, matched to the same calendar week. Expect small differences (about 1 point or less)
   from the printed NASS report, which interpolates.
-- **Brazil and France:** last year and the 5-yr average are taken directly from the agency's
+- **Interpolated weeks:** a missing report week, such as the 2025 US government shutdown, is
+  filled linearly. Each affected figure is stored with `"quality": {"last_year": "interpolated"}`
+  and, for an average, `avg5_ex_interp` plus `avg5_ex_interp_n` (the average recomputed with
+  interpolated years removed, and how many years remain). The page shades the cell, prints the
+  word “interpolated”, and adds a tooltip. **Exclude interpolated values** drops those figures
+  from comparisons. If no observed comparator remains, the cell reads “not available”.
+- **Brazil and France:** last year and the 5-year average are taken directly from the agency's
   file.
-- **Argentina:** MAGyP publishes the same week of the previous campaign but no 5-yr average.
+- **Argentina:** MAGyP publishes the same week of the previous campaign but no 5-year average.
+  Each row cites `source_document`, `source_page`, and `source_label` for the PDF page it was
+  read from.
 
 ## Roadmap
 

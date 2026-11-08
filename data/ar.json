@@ -2,13 +2,14 @@
  "code": "ar",
  "country": "Argentina",
  "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
- "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe Semanal al 05_11_2026.pdf",
+ "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
  "report_date": "2026-11-05",
  "fetched_at": "2026-11-08T01:29:26+00:00",
  "beta": true,
  "notes": [
-  "Parsed from the weekly PDF – cross-check against the report if a number looks off.",
-  "Last year = same week of the previous campaign. No 5-yr average published."
+  "Parsed from the weekly PDF. Cross-check a figure against the cited page if it looks off.",
+  "Last year is the same week of the previous campaign. No 5-year average is published.",
+  "Each row cites the source PDF and the page it was read from."
  ],
  "rows": [
   {
@@ -20,7 +21,10 @@
    "current": 14.0,
    "prev_week": 6.0,
    "last_year": 13.0,
-   "avg5": null
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_page": 20,
+   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 20"
   },
   {
    "crop": "Rice",
@@ -31,7 +35,10 @@
    "current": 76.0,
    "prev_week": 72.0,
    "last_year": 79.0,
-   "avg5": null
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_page": 21,
+   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 21"
   },
   {
    "crop": "Sunflower",
@@ -42,7 +49,10 @@
    "current": 61.0,
    "prev_week": 55.0,
    "last_year": 71.0,
-   "avg5": null
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_page": 22,
+   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 22"
   },
   {
    "crop": "Corn",
@@ -53,7 +63,10 @@
    "current": 40.0,
    "prev_week": 37.0,
    "last_year": 39.0,
-   "avg5": null
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_page": 23,
+   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 23"
   }
  ]
 }

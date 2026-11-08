@@ -8,6 +8,7 @@ from __future__ import annotations
 import io
 import re
 from datetime import date, datetime
+from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 from common import payload, rec, session, validate
 
@@ -25,6 +26,19 @@ DATES_RE = re.compile(r"^(?:\d{2}/\d{2}\s*){3,}$")
 
 def _num(tok: str) -> float:
     return float(tok.replace(".", "").replace(",", "."))
+
+
+def clean_url(url: str) -> str:
+    """Percent-encode spaces in the path so the PDF link stays a single URL."""
+    parts = urlsplit(url.strip())
+    return urlunsplit((parts.scheme, parts.netloc, quote(parts.path, safe="/%"), parts.query, ""))
+
+
+def document_name(url: str) -> str:
+    name = unquote(urlsplit(url).path).rsplit("/", 1)[-1]
+    # Drop the archive id prefix (261105_) so the visible citation is the document name.
+    name = re.sub(r"^\d+_", "", name)
+    return name or "MAGyP Informe Semanal.pdf"
 
 
 def _row_after(line: str, label: str):
@@ -72,13 +86,22 @@ def parse_page(text: str):
             "season": f"{y1}/{y2 % 100:02d}", "dates": dates, "cur": cur, "ly": ly}
 
 
-def to_row(p):
+def to_row(p, *, source_document=None, source_page=None):
     pcts = p["cur"][1]
     cur = pcts[-1]
     prev = pcts[-2] if len(pcts) >= 2 else 0.0
     ly = p["ly"][1][-1] if p["ly"] and p["ly"][1] else None
+    extra = {}
+    if source_document and source_page is not None:
+        doc = clean_url(source_document)
+        page = int(source_page)
+        extra = {
+            "source_document": doc,
+            "source_page": page,
+            "source_label": f"{document_name(doc)}, p. {page}",
+        }
     return rec(p["crop"], p["op"], cur, prev_week=prev, last_year=ly, region="Argentina",
-               crop_local=p["crop_local"].title(), season=p["season"])
+               crop_local=p["crop_local"].title(), season=p["season"], **extra)
 
 
 def latest_pdf(s) -> tuple[str, date]:
@@ -105,6 +128,7 @@ def fetch() -> dict:
 
     s = session()
     url, rdate = latest_pdf(s)
+    url = clean_url(url)
     r = s.get(url, timeout=120)
     r.raise_for_status()
     rows = []
@@ -115,9 +139,11 @@ def fetch() -> dict:
                 continue
             p = parse_page(text)
             if p:
-                rows.append(to_row(p))
+                # page.page_number matches the printed page number in this report.
+                rows.append(to_row(p, source_document=url, source_page=page.page_number))
     validate(rows, min_rows=1)
     return payload("ar", "Argentina", "MAGyP Estimaciones Agrícolas (Informe Semanal)", url,
                    rdate.isoformat(), rows, beta=True,
-                   notes=["Parsed from the weekly PDF – cross-check against the report if a number looks off.",
-                          "Last year = same week of the previous campaign. No 5-yr average published."])
+                   notes=["Parsed from the weekly PDF. Cross-check a figure against the cited page if it looks off.",
+                          "Last year is the same week of the previous campaign. No 5-year average is published.",
+                          "Each row cites the source PDF and the page it was read from."])
