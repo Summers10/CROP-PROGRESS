@@ -52,29 +52,61 @@ def _d(s: str) -> date:
 
 
 def _nearest(series: dict[date, float], target: date, tol_days=4, fill=False):
-    """Value reported closest to `target` (within tol_days).
-    With fill=True, also handles weeks outside that year's reporting window:
-    before the first report of the season -> 0, after the last -> last value
-    (e.g. harvest finished and NASS stopped reporting)."""
+    """Return (value, method) for the week of `target`.
+
+    method is "observed" when a report falls within tol_days,
+    "interpolated" when a reporting gap is filled linearly (for example the
+    October-November 2025 shutdown), "carried" when the season has finished
+    and the last report is reused, "assumed" when the season has not started
+    and the historical filler is 0, or None when no value is returned.
+    """
     best = None
     for d, v in series.items():
         if abs((d - target).days) <= tol_days and (best is None or abs((d - target).days) < abs((best[0] - target).days)):
             best = (d, v)
     if best or not fill:
-        return best[1] if best else None
+        return (best[1], "observed") if best else (None, None)
     before = [d for d in series if target - timedelta(days=70) <= d < target]
     after = [d for d in series if target < d <= target + timedelta(days=70)]
     if before and after:          # gap in reporting (e.g. Oct-Nov 2025 shutdown): interpolate
         b, a = max(before), min(after)
         w = (target - b).days / (a - b).days
-        return series[b] + w * (series[a] - series[b])
+        return series[b] + w * (series[a] - series[b]), "interpolated"
     if fill == "interp":
-        return None
+        return None, None
     if before:                    # season finished, reporting stopped -> carry last value
-        return series[max(before)]
+        return series[max(before)], "carried"
     if after:                     # season not started yet that year
-        return 0.0
-    return None
+        return 0.0, "assumed"
+    return None, None
+
+
+def _window(series: dict[date, float], latest: date, fill):
+    """Previous week, last year, and 5-year average for the week of `latest`.
+
+    The 5-year average is also recomputed with interpolated years removed.
+    That recomputation is returned only when the published average used at
+    least one interpolated year.
+    """
+    prev, _prev_method = _nearest(series, latest - timedelta(days=7), 1)
+    last_year, last_method = _nearest(series, latest - timedelta(days=364), fill=fill)
+    parts = []
+    for k in range(1, 6):
+        value, method = _nearest(series, latest - timedelta(days=364 * k), fill=fill)
+        if value is not None:
+            parts.append((value, method))
+    avg5 = sum(v for v, _method in parts) / len(parts) if len(parts) >= 3 else None
+    quality = {}
+    kept_n = None
+    avg5_ex = None
+    if last_method == "interpolated":
+        quality["last_year"] = "interpolated"
+    if avg5 is not None and any(method == "interpolated" for _value, method in parts):
+        quality["avg5"] = "interpolated"
+        kept = [v for v, method in parts if method != "interpolated"]
+        kept_n = len(kept)
+        avg5_ex = sum(kept) / len(kept) if kept_n >= 3 else None
+    return prev, last_year, avg5, quality, avg5_ex, kept_n
 
 
 def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]:
@@ -110,12 +142,10 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
         if latest not in series:
             continue  # not active this week
         cur = series[latest]
-        prev = _nearest(series, latest - timedelta(days=7), 1)
-        ly = _nearest(series, latest - timedelta(days=364), fill=True)
-        hist = [_nearest(series, latest - timedelta(days=364 * k), fill=True) for k in range(1, 6)]
-        hist = [h for h in hist if h is not None]
-        avg5 = sum(hist) / len(hist) if len(hist) >= 3 else None
-        out.append(rec(crop, stage, cur, prev_week=prev, last_year=ly, avg5=avg5, region="United States"))
+        prev, ly, avg5, quality, avg5_ex, kept_n = _window(series, latest, fill=True)
+        out.append(rec(crop, stage, cur, prev_week=prev, last_year=ly, avg5=avg5,
+                       region="United States", quality=quality or None,
+                       avg5_ex_interp=avg5_ex, avg5_ex_interp_n=kept_n))
 
     def ge(d):
         return (d.get("gd") or 0) + (d.get("ex") or 0) if d else None
@@ -125,13 +155,10 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
             continue
         cur = weeks[latest]
         series_ge = {w: ge(d) for w, d in weeks.items()}
-        prev = _nearest(series_ge, latest - timedelta(days=7), 1)
-        ly = _nearest(series_ge, latest - timedelta(days=364), fill="interp")
-        hist = [_nearest(series_ge, latest - timedelta(days=364 * k), fill="interp") for k in range(1, 6)]
-        hist = [h for h in hist if h is not None]
-        avg5 = sum(hist) / len(hist) if len(hist) >= 3 else None
+        prev, ly, avg5, quality, avg5_ex, kept_n = _window(series_ge, latest, fill="interp")
         out.append(rec(crop, "condition_ge", ge(cur), prev_week=prev, last_year=ly, avg5=avg5,
-                       region="United States", dist=cur))
+                       region="United States", dist=cur, quality=quality or None,
+                       avg5_ex_interp=avg5_ex, avg5_ex_interp_n=kept_n))
     return latest.isoformat(), out
 
 
@@ -147,6 +174,6 @@ def fetch() -> dict:
     report_date, rows = parse(raw)
     validate(rows, min_rows=2)
     return payload("us", "United States", "USDA NASS Crop Progress", SOURCE_URL, report_date, rows,
-                   notes=["Week-ending date shown. Last year / 5-yr avg matched to the same calendar week.",
-                          "Weeks missing from past years (e.g. the Oct-Nov 2025 shutdown) are linearly interpolated.",
-                          "Condition = % Good + Excellent."])
+                   notes=["Week-ending date shown. Last year and the 5-year average are matched to the same calendar week.",
+                          "Weeks with no published report (for example the October-November 2025 shutdown) are linearly interpolated and marked on each figure.",
+                          "Condition is the share rated good or excellent."])

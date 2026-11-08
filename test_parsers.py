@@ -115,6 +115,24 @@ def test_magyp_maize():
     assert (row["current"], row["prev_week"], row["last_year"]) == (37, 35, 36)
 
 
+def test_magyp_source_citation():
+    row = ar_magyp.to_row(
+        ar_magyp.parse_page(AR_MAIZE),
+        source_document="https://example.test/reports/Informe Semanal.pdf",
+        source_page=22,
+    )
+    assert row["source_page"] == 22
+    assert row["source_document"] == "https://example.test/reports/Informe%20Semanal.pdf"
+    assert row["source_label"] == "Informe Semanal.pdf, p. 22"
+    prefixed = ar_magyp.to_row(
+        ar_magyp.parse_page(AR_MAIZE),
+        source_document="https://example.test/261105_Informe Semanal.pdf",
+        source_page=20,
+    )
+    assert prefixed["source_label"] == "Informe Semanal.pdf, p. 20"
+    assert "source_page" not in ar_magyp.to_row(ar_magyp.parse_page(AR_MAIZE))
+
+
 def test_magyp_rice_split_line():
     row = ar_magyp.to_row(ar_magyp.parse_page(AR_RICE))
     assert (row["crop"], row["current"], row["prev_week"], row["last_year"]) == ("Rice", 72, 67, 62)
@@ -140,6 +158,7 @@ def test_nass():
     assert (corn["current"], corn["prev_week"], corn["last_year"], corn["avg5"]) == (66, 52, 60, 60)
     ww = next(r for r in rows if r["metric"] == "condition_ge")
     assert ww["current"] == 45 and ww["crop"] == "Wheat, Winter"
+    assert "quality" not in corn and "avg5_ex_interp" not in corn
 
 
 def test_nass_fill_after_season_end():
@@ -149,6 +168,7 @@ def test_nass_fill_after_season_end():
            _qs("SOYBEANS", "PCT HARVESTED", latest - timedelta(364 + 14), 100)]
     _, rows = us_nass.parse(raw)
     assert rows[0]["last_year"] == 100
+    assert "quality" not in rows[0]
 
 
 def test_nass_interpolates_shutdown_gap():
@@ -160,3 +180,82 @@ def test_nass_interpolates_shutdown_gap():
            _qs("CORN, GRAIN", "PCT HARVESTED", ly + timedelta(21), 70)]
     _, rows = us_nass.parse(raw)
     assert rows[0]["last_year"] == 55
+    assert rows[0]["quality"]["last_year"] == "interpolated"
+
+
+def test_nass_avg_marks_interpolated_component():
+    latest = date(2026, 10, 25)
+    raw = [_qs("CORN, GRAIN", "PCT HARVESTED", latest, 60)]
+    ly = latest - timedelta(364)
+    raw += [
+        _qs("CORN, GRAIN", "PCT HARVESTED", ly - timedelta(21), 40),
+        _qs("CORN, GRAIN", "PCT HARVESTED", ly + timedelta(21), 70),
+    ]
+    for k, v in ((2, 50), (3, 60), (4, 70)):
+        raw.append(_qs("CORN, GRAIN", "PCT HARVESTED", latest - timedelta(364 * k), v))
+    _, rows = us_nass.parse(raw)
+    corn = rows[0]
+    assert corn["last_year"] == 55
+    assert corn["quality"]["last_year"] == "interpolated"
+    assert corn["quality"]["avg5"] == "interpolated"
+    assert corn["avg5"] == 58.8
+    assert corn["avg5_ex_interp"] == 60
+    assert corn["avg5_ex_interp_n"] == 3
+
+
+def test_nass_avg_without_enough_observed_years():
+    latest = date(2026, 10, 25)
+    raw = [_qs("CORN, GRAIN", "PCT HARVESTED", latest, 60)]
+    ly = latest - timedelta(364)
+    raw += [
+        _qs("CORN, GRAIN", "PCT HARVESTED", ly - timedelta(21), 40),
+        _qs("CORN, GRAIN", "PCT HARVESTED", ly + timedelta(21), 70),
+        _qs("CORN, GRAIN", "PCT HARVESTED", latest - timedelta(364 * 2), 50),
+        _qs("CORN, GRAIN", "PCT HARVESTED", latest - timedelta(364 * 3), 60),
+    ]
+    _, rows = us_nass.parse(raw)
+    corn = rows[0]
+    assert corn["quality"]["avg5"] == "interpolated"
+    assert corn["avg5_ex_interp"] is None
+    assert corn["avg5_ex_interp_n"] == 2
+
+
+def test_nass_before_season_is_not_marked_interpolated():
+    latest = date(2026, 6, 7)
+    raw = [
+        _qs("CORN", "PCT PLANTED", latest, 40),
+        _qs("CORN", "PCT PLANTED", latest - timedelta(364) + timedelta(14), 8),
+    ]
+    _, rows = us_nass.parse(raw)
+    assert rows[0]["last_year"] == 0
+    assert "quality" not in rows[0]
+
+
+def test_nass_condition_does_not_invent_zero():
+    latest = date(2026, 6, 7)
+    raw = [_qs("WHEAT, WINTER", u, latest, v, "CONDITION") for u, v in
+           (("PCT EXCELLENT", 10), ("PCT GOOD", 50), ("PCT FAIR", 20), ("PCT POOR", 10), ("PCT VERY POOR", 10))]
+    raw += [_qs("WHEAT, WINTER", u, latest - timedelta(364) + timedelta(14), 1, "CONDITION")
+            for u in ("PCT EXCELLENT", "PCT GOOD", "PCT FAIR", "PCT POOR", "PCT VERY POOR")]
+    _, rows = us_nass.parse(raw)
+    row = rows[0]
+    assert row["metric"] == "condition_ge" and row["current"] == 60
+    assert row["last_year"] is None
+    assert "quality" not in row
+
+
+def test_ui_marks_interpolated_values():
+    from pathlib import Path
+    html = (Path(__file__).resolve().parent / "index.html").read_text(encoding="utf-8")
+    for phrase in (
+        'lang="en-CA"',
+        "Exclude interpolated values",
+        "Interpolated values excluded",
+        "not available",
+        "interp-tag",
+        "avg5_ex_interp",
+        "source_page",
+        "source_label",
+        "2025 US government shutdown",
+    ):
+        assert phrase in html, phrase
