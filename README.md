@@ -61,10 +61,12 @@ python -m http.server  # then open http://localhost:8000
   or another crop stage name.
 - `condition_ge` rows also carry `dist`, the full condition breakdown:
   `vp` (very poor), `pr` (poor), `fr` (fair), `gd` (good), `ex` (excellent).
-- `quality` maps a column to `"interpolated"` when that figure was linearly filled. It is
-  omitted when every figure is observed.
-- `avg5_ex_interp` and `avg5_ex_interp_n` are present only when the 5-year average used an
-  interpolated year. The value is null when fewer than three non-interpolated years remain.
+- `quality` maps a column to `"interpolated"` or `"estimated"`. It is omitted when every
+  figure is observed. `"estimated"` means a finished season’s last figure was carried forward,
+  or a season that had not started was entered as 0.
+- `avg5_observed` and `avg5_observed_n` are present only when the 5-year average used an
+  interpolated or estimated year. The value is the mean of the observed years, or null when
+  fewer than three observed years remain.
 - Rows read from a PDF also carry `source_document` (URL), `source_page`, and `source_label`.
 
 ## Notes on comparisons
@@ -73,11 +75,14 @@ python -m http.server  # then open http://localhost:8000
   history, matched to the same calendar week. Expect small differences (about 1 point or less)
   from the printed NASS report, which interpolates.
 - **Interpolated weeks:** a missing report week, such as the 2025 US government shutdown, is
-  filled linearly. Each affected figure is stored with `"quality": {"last_year": "interpolated"}`
-  and, for an average, `avg5_ex_interp` plus `avg5_ex_interp_n` (the average recomputed with
-  interpolated years removed, and how many years remain). The page shades the cell, prints the
-  word “interpolated”, and adds a tooltip. **Exclude interpolated values** drops those figures
-  from comparisons. If no observed comparator remains, the cell reads “not available”.
+  filled linearly and stored as `"quality": {"last_year": "interpolated"}`. The page shades the
+  cell, prints the word “interpolated”, and adds a tooltip.
+- **Estimated weeks:** a finished season reuses the last published figure, and a season that
+  has not started is entered as 0. Those cells are stored as `"estimated"`, shaded separately,
+  and print the word “estimated”.
+- **Exclude interpolated and estimated** drops both from comparisons. If no observed comparator
+  remains, the cell reads “not available”. When a 5-year average still has at least three
+  observed years, `avg5_observed` is that mean and `avg5_observed_n` is the year count.
 - **Brazil and France:** last year and the 5-year average are taken directly from the agency's
   file.
 - **Argentina:** MAGyP publishes the same week of the previous campaign but no 5-year average.
