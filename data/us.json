@@ -4,12 +4,13 @@
  "source": "USDA NASS Crop Progress",
  "source_url": "https://www.nass.usda.gov/Publications/National_Crop_Progress/",
  "report_date": "2026-11-01",
- "fetched_at": "2026-11-08T01:29:00+00:00",
+ "fetched_at": "2026-11-08T18:23:28+00:00",
  "beta": false,
  "notes": [
-  "Week-ending date shown. Last year / 5-yr avg matched to the same calendar week.",
-  "Weeks missing from past years (e.g. the Oct-Nov 2025 shutdown) are linearly interpolated.",
-  "Condition = % Good + Excellent."
+  "Week-ending date shown. Last year and the 5-year average are matched to the same calendar week.",
+  "Weeks with no published report (for example the October-November 2025 shutdown) are linearly interpolated and marked on each figure.",
+  "A finished season reuses the last published figure, and a season that has not started is entered as 0. Both are marked as estimated.",
+  "Condition is the share rated good or excellent."
  ],
  "rows": [
   {
@@ -21,7 +22,13 @@
    "current": 74.0,
    "prev_week": 60.0,
    "last_year": 70.1,
-   "avg5": 82.6
+   "avg5": 82.6,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 85.8,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Cotton, Upland",
@@ -32,7 +39,13 @@
    "current": 92.0,
    "prev_week": 89.0,
    "last_year": 67.0,
-   "avg5": 90.6
+   "avg5": 90.6,
+   "quality": {
+    "last_year": "estimated",
+    "avg5": "estimated"
+   },
+   "avg5_observed": null,
+   "avg5_observed_n": 2
   },
   {
    "crop": "Cotton, Upland",
@@ -43,7 +56,13 @@
    "current": 63.0,
    "prev_week": 52.0,
    "last_year": 55.3,
-   "avg5": 58.5
+   "avg5": 58.5,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 59.2,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Peanuts",
@@ -54,7 +73,13 @@
    "current": 66.0,
    "prev_week": 51.0,
    "last_year": 67.7,
-   "avg5": 76.9
+   "avg5": 76.9,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 79.2,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Sorghum",
@@ -65,7 +90,13 @@
    "current": 96.0,
    "prev_week": 93.0,
    "last_year": 61.0,
-   "avg5": 88.6
+   "avg5": 88.6,
+   "quality": {
+    "last_year": "estimated",
+    "avg5": "estimated"
+   },
+   "avg5_observed": null,
+   "avg5_observed_n": 0
   },
   {
    "crop": "Sorghum, Grain",
@@ -76,7 +107,13 @@
    "current": 64.0,
    "prev_week": 56.0,
    "last_year": 66.6,
-   "avg5": 81.9
+   "avg5": 81.9,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 85.8,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Soybeans",
@@ -87,7 +124,13 @@
    "current": 88.0,
    "prev_week": 79.0,
    "last_year": 73.3,
-   "avg5": 87.9
+   "avg5": 87.9,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 91.5,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Sugarbeets",
@@ -98,7 +141,13 @@
    "current": 86.0,
    "prev_week": 75.0,
    "last_year": 75.0,
-   "avg5": 90.6
+   "avg5": 90.6,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 94.5,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Sunflower",
@@ -109,7 +158,13 @@
    "current": 61.0,
    "prev_week": 46.0,
    "last_year": 55.7,
-   "avg5": 64.9
+   "avg5": 64.9,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 67.2,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Wheat, Winter",
@@ -120,7 +175,13 @@
    "current": 65.0,
    "prev_week": 53.0,
    "last_year": 60.1,
-   "avg5": 69.6
+   "avg5": 69.6,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 72.0,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Wheat, Winter",
@@ -131,7 +192,13 @@
    "current": 83.0,
    "prev_week": 76.0,
    "last_year": 75.4,
-   "avg5": 87.1
+   "avg5": 87.1,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 90.0,
+   "avg5_observed_n": 4
   },
   {
    "crop": "Wheat, Winter",
