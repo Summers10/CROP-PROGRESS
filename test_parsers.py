@@ -158,7 +158,7 @@ def test_nass():
     assert (corn["current"], corn["prev_week"], corn["last_year"], corn["avg5"]) == (66, 52, 60, 60)
     ww = next(r for r in rows if r["metric"] == "condition_ge")
     assert ww["current"] == 45 and ww["crop"] == "Wheat, Winter"
-    assert "quality" not in corn and "avg5_ex_interp" not in corn
+    assert "quality" not in corn and "avg5_observed" not in corn
 
 
 def test_nass_fill_after_season_end():
@@ -168,7 +168,7 @@ def test_nass_fill_after_season_end():
            _qs("SOYBEANS", "PCT HARVESTED", latest - timedelta(364 + 14), 100)]
     _, rows = us_nass.parse(raw)
     assert rows[0]["last_year"] == 100
-    assert "quality" not in rows[0]
+    assert rows[0]["quality"]["last_year"] == "estimated"
 
 
 def test_nass_interpolates_shutdown_gap():
@@ -199,8 +199,8 @@ def test_nass_avg_marks_interpolated_component():
     assert corn["quality"]["last_year"] == "interpolated"
     assert corn["quality"]["avg5"] == "interpolated"
     assert corn["avg5"] == 58.8
-    assert corn["avg5_ex_interp"] == 60
-    assert corn["avg5_ex_interp_n"] == 3
+    assert corn["avg5_observed"] == 60
+    assert corn["avg5_observed_n"] == 3
 
 
 def test_nass_avg_without_enough_observed_years():
@@ -216,11 +216,11 @@ def test_nass_avg_without_enough_observed_years():
     _, rows = us_nass.parse(raw)
     corn = rows[0]
     assert corn["quality"]["avg5"] == "interpolated"
-    assert corn["avg5_ex_interp"] is None
-    assert corn["avg5_ex_interp_n"] == 2
+    assert corn["avg5_observed"] is None
+    assert corn["avg5_observed_n"] == 2
 
 
-def test_nass_before_season_is_not_marked_interpolated():
+def test_nass_before_season_is_estimated():
     latest = date(2026, 6, 7)
     raw = [
         _qs("CORN", "PCT PLANTED", latest, 40),
@@ -228,7 +228,23 @@ def test_nass_before_season_is_not_marked_interpolated():
     ]
     _, rows = us_nass.parse(raw)
     assert rows[0]["last_year"] == 0
-    assert "quality" not in rows[0]
+    assert rows[0]["quality"]["last_year"] == "estimated"
+
+
+def test_nass_avg_marks_carried_component():
+    latest = date(2026, 11, 22)
+    raw = [_qs("SOYBEANS", "PCT HARVESTED", latest, 97),
+           _qs("SOYBEANS", "PCT HARVESTED", latest - timedelta(364 + 14), 100)]
+    for k, v in ((2, 80), (3, 70), (4, 60)):
+        raw.append(_qs("SOYBEANS", "PCT HARVESTED", latest - timedelta(364 * k), v))
+    _, rows = us_nass.parse(raw)
+    soy = rows[0]
+    assert soy["last_year"] == 100
+    assert soy["quality"]["last_year"] == "estimated"
+    assert soy["quality"]["avg5"] == "estimated"
+    assert soy["avg5"] == 77.5
+    assert soy["avg5_observed"] == 70
+    assert soy["avg5_observed_n"] == 3
 
 
 def test_nass_condition_does_not_invent_zero():
@@ -249,11 +265,13 @@ def test_ui_marks_interpolated_values():
     html = (Path(__file__).resolve().parent / "index.html").read_text(encoding="utf-8")
     for phrase in (
         'lang="en-CA"',
-        "Exclude interpolated values",
-        "Interpolated values excluded",
+        "Exclude interpolated and estimated",
+        "Interpolated and estimated excluded",
         "not available",
         "interp-tag",
-        "avg5_ex_interp",
+        "est-tag",
+        "avg5_observed",
+        "Estimated value.",
         "source_page",
         "source_label",
         "2025 US government shutdown",

@@ -81,12 +81,20 @@ def _nearest(series: dict[date, float], target: date, tol_days=4, fill=False):
     return None, None
 
 
+def _quality_label(method: str | None) -> str | None:
+    if method == "interpolated":
+        return "interpolated"
+    if method in ("carried", "assumed"):
+        return "estimated"
+    return None
+
+
 def _window(series: dict[date, float], latest: date, fill):
     """Previous week, last year, and 5-year average for the week of `latest`.
 
-    The 5-year average is also recomputed with interpolated years removed.
-    That recomputation is returned only when the published average used at
-    least one interpolated year.
+    When the published average uses an interpolated or estimated year, the
+    average of the observed years alone is returned as well. That observed
+    average is None when fewer than three observed years remain.
     """
     prev, _prev_method = _nearest(series, latest - timedelta(days=7), 1)
     last_year, last_method = _nearest(series, latest - timedelta(days=364), fill=fill)
@@ -97,16 +105,17 @@ def _window(series: dict[date, float], latest: date, fill):
             parts.append((value, method))
     avg5 = sum(v for v, _method in parts) / len(parts) if len(parts) >= 3 else None
     quality = {}
-    kept_n = None
-    avg5_ex = None
-    if last_method == "interpolated":
-        quality["last_year"] = "interpolated"
-    if avg5 is not None and any(method == "interpolated" for _value, method in parts):
-        quality["avg5"] = "interpolated"
-        kept = [v for v, method in parts if method != "interpolated"]
-        kept_n = len(kept)
-        avg5_ex = sum(kept) / len(kept) if kept_n >= 3 else None
-    return prev, last_year, avg5, quality, avg5_ex, kept_n
+    observed_n = None
+    avg5_observed = None
+    label = _quality_label(last_method)
+    if label:
+        quality["last_year"] = label
+    if avg5 is not None and any(method != "observed" for _value, method in parts):
+        quality["avg5"] = "interpolated" if any(method == "interpolated" for _value, method in parts) else "estimated"
+        observed = [v for v, method in parts if method == "observed"]
+        observed_n = len(observed)
+        avg5_observed = sum(observed) / len(observed) if observed_n >= 3 else None
+    return prev, last_year, avg5, quality, avg5_observed, observed_n
 
 
 def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]:
@@ -142,10 +151,10 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
         if latest not in series:
             continue  # not active this week
         cur = series[latest]
-        prev, ly, avg5, quality, avg5_ex, kept_n = _window(series, latest, fill=True)
+        prev, ly, avg5, quality, avg5_obs, observed_n = _window(series, latest, fill=True)
         out.append(rec(crop, stage, cur, prev_week=prev, last_year=ly, avg5=avg5,
                        region="United States", quality=quality or None,
-                       avg5_ex_interp=avg5_ex, avg5_ex_interp_n=kept_n))
+                       avg5_observed=avg5_obs, avg5_observed_n=observed_n))
 
     def ge(d):
         return (d.get("gd") or 0) + (d.get("ex") or 0) if d else None
@@ -155,10 +164,10 @@ def parse(rows: list[dict], today: date | None = None) -> tuple[str, list[dict]]
             continue
         cur = weeks[latest]
         series_ge = {w: ge(d) for w, d in weeks.items()}
-        prev, ly, avg5, quality, avg5_ex, kept_n = _window(series_ge, latest, fill="interp")
+        prev, ly, avg5, quality, avg5_obs, observed_n = _window(series_ge, latest, fill="interp")
         out.append(rec(crop, "condition_ge", ge(cur), prev_week=prev, last_year=ly, avg5=avg5,
                        region="United States", dist=cur, quality=quality or None,
-                       avg5_ex_interp=avg5_ex, avg5_ex_interp_n=kept_n))
+                       avg5_observed=avg5_obs, avg5_observed_n=observed_n))
     return latest.isoformat(), out
 
 
@@ -176,4 +185,5 @@ def fetch() -> dict:
     return payload("us", "United States", "USDA NASS Crop Progress", SOURCE_URL, report_date, rows,
                    notes=["Week-ending date shown. Last year and the 5-year average are matched to the same calendar week.",
                           "Weeks with no published report (for example the October-November 2025 shutdown) are linearly interpolated and marked on each figure.",
+                          "A finished season reuses the last published figure, and a season that has not started is entered as 0. Both are marked as estimated.",
                           "Condition is the share rated good or excellent."])

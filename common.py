@@ -33,13 +33,14 @@ def now_iso() -> str:
 
 def rec(crop, metric, current, *, prev_week=None, last_year=None, avg5=None,
         region="National", crop_local=None, season=None, dist=None, quality=None,
-        avg5_ex_interp=None, avg5_ex_interp_n=None, source_document=None,
+        avg5_observed=None, avg5_observed_n=None, source_document=None,
         source_page=None, source_label=None):
     """One normalized row. Percentages are 0-100 floats (or None).
 
-    `quality` maps a field name to "interpolated" when that figure was filled
-    across a missing report week. `avg5_ex_interp_n` is set only in that case
-    for the 5-year average, including when the recomputed average is None.
+    `quality` maps a field name to "interpolated" or "estimated".
+    `avg5_observed_n` is set only when the 5-year average used one of those,
+    including when fewer than three observed years remain and the recomputed
+    average is None.
     """
     def r(v):
         return None if v is None else round(float(v), 1)
@@ -56,9 +57,9 @@ def rec(crop, metric, current, *, prev_week=None, last_year=None, avg5=None,
     }
     if quality:
         out["quality"] = quality
-    if avg5_ex_interp_n is not None:
-        out["avg5_ex_interp"] = r(avg5_ex_interp)
-        out["avg5_ex_interp_n"] = avg5_ex_interp_n
+    if avg5_observed_n is not None:
+        out["avg5_observed"] = r(avg5_observed)
+        out["avg5_observed_n"] = avg5_observed_n
     if source_document:
         out["source_document"] = source_document
     if source_page is not None:
@@ -79,7 +80,7 @@ def validate(rows: list[dict], min_rows: int = 1) -> None:
     if len(rows) < min_rows:
         raise ValidationError(f"only {len(rows)} rows parsed (need >= {min_rows})")
     for row in rows:
-        for k in ("current", "prev_week", "last_year", "avg5", "avg5_ex_interp"):
+        for k in ("current", "prev_week", "last_year", "avg5", "avg5_observed", "avg5_ex_interp"):
             v = row.get(k)
             if v is not None and not (0 <= v <= 100):
                 raise ValidationError(f"{row['crop']} {row['metric']} {k}={v} outside 0-100")
