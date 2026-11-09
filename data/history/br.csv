@@ -11,3 +11,10 @@ report_date,crop,season,region,metric,current,last_year,avg5
 2026-10-30,Corn (1st crop),2026/27,Brazil (9 estados),planted,44.2,42.3,42.5
 2026-10-30,Soybeans,2026/27,Brazil (12 estados),planted,54.3,47.7,51.8
 2026-10-30,Wheat,2026,Brazil (8 estados),harvested,66.9,50.8,60.3
+2026-11-06,Rice,2026/27,Brazil (6 estados),planted,63.1,66.6,65.6
+2026-11-06,Rice,2026/27,Brazil (6 estados),harvested,0.5,0.0,0.1
+2026-11-06,Dry beans (1st),2026/27,Brazil (8 estados),planted,44.3,38.8,41.4
+2026-11-06,Dry beans (1st),2026/27,Brazil (8 estados),harvested,4.1,0.0,0.8
+2026-11-06,Corn (1st crop),2026/27,Brazil (9 estados),planted,51.2,47.2,49.5
+2026-11-06,Soybeans,2026/27,Brazil (12 estados),planted,66.8,59.0,62.7
+2026-11-06,Wheat,2026,Brazil (8 estados),harvested,78.4,63.6,73.4

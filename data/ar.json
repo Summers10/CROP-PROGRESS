@@ -4,7 +4,7 @@
  "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
  "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
  "report_date": "2026-11-05",
- "fetched_at": "2026-11-09T01:46:01+00:00",
+ "fetched_at": "2026-11-09T23:00:55+00:00",
  "beta": true,
  "notes": [
   "Parsed from the weekly PDF. Cross-check a figure against the cited page if it looks off.",
@@ -67,6 +67,20 @@
    "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
    "source_page": 23,
    "source_label": "Informe Semanal al 05_11_2026.pdf, p. 23"
+  },
+  {
+   "crop": "Peanuts",
+   "crop_local": "Mani",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 24.0,
+   "prev_week": 5.0,
+   "last_year": 34.0,
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_page": 24,
+   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 24"
   }
  ]
 }

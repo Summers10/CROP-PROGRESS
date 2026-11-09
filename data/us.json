@@ -3,8 +3,8 @@
  "country": "United States",
  "source": "USDA NASS Crop Progress",
  "source_url": "https://www.nass.usda.gov/Publications/National_Crop_Progress/",
- "report_date": "2026-11-01",
- "fetched_at": "2026-11-09T01:45:35+00:00",
+ "report_date": "2026-11-08",
+ "fetched_at": "2026-11-09T23:00:21+00:00",
  "beta": false,
  "notes": [
   "Week-ending date shown. Last year and the 5-year average are matched to the same calendar week.",
@@ -19,15 +19,15 @@
    "season": null,
    "region": "United States",
    "metric": "harvested",
-   "current": 74.0,
-   "prev_week": 60.0,
-   "last_year": 70.1,
-   "avg5": 82.6,
+   "current": 81.0,
+   "prev_week": 74.0,
+   "last_year": 80.6,
+   "avg5": 89.5,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 85.8,
+   "avg5_observed": 91.8,
    "avg5_observed_n": 4
   },
   {
@@ -36,61 +36,10 @@
    "season": null,
    "region": "United States",
    "metric": "bolls opening",
-   "current": 92.0,
-   "prev_week": 89.0,
+   "current": 94.0,
+   "prev_week": 92.0,
    "last_year": 67.0,
    "avg5": 90.6,
-   "quality": {
-    "last_year": "estimated",
-    "avg5": "estimated"
-   },
-   "avg5_observed": null,
-   "avg5_observed_n": 2
-  },
-  {
-   "crop": "Cotton, Upland",
-   "crop_local": null,
-   "season": null,
-   "region": "United States",
-   "metric": "harvested",
-   "current": 63.0,
-   "prev_week": 52.0,
-   "last_year": 55.3,
-   "avg5": 58.5,
-   "quality": {
-    "last_year": "interpolated",
-    "avg5": "interpolated"
-   },
-   "avg5_observed": 59.2,
-   "avg5_observed_n": 4
-  },
-  {
-   "crop": "Peanuts",
-   "crop_local": null,
-   "season": null,
-   "region": "United States",
-   "metric": "harvested",
-   "current": 66.0,
-   "prev_week": 51.0,
-   "last_year": 67.7,
-   "avg5": 76.9,
-   "quality": {
-    "last_year": "interpolated",
-    "avg5": "interpolated"
-   },
-   "avg5_observed": 79.2,
-   "avg5_observed_n": 4
-  },
-  {
-   "crop": "Sorghum",
-   "crop_local": null,
-   "season": null,
-   "region": "United States",
-   "metric": "mature",
-   "current": 96.0,
-   "prev_week": 93.0,
-   "last_year": 61.0,
-   "avg5": 88.6,
    "quality": {
     "last_year": "estimated",
     "avg5": "estimated"
@@ -99,20 +48,54 @@
    "avg5_observed_n": 0
   },
   {
+   "crop": "Cotton, Upland",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 71.0,
+   "prev_week": 63.0,
+   "last_year": 63.1,
+   "avg5": 67.4,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 68.5,
+   "avg5_observed_n": 4
+  },
+  {
+   "crop": "Peanuts",
+   "crop_local": null,
+   "season": null,
+   "region": "United States",
+   "metric": "harvested",
+   "current": 77.0,
+   "prev_week": 66.0,
+   "last_year": 77.9,
+   "avg5": 84.8,
+   "quality": {
+    "last_year": "interpolated",
+    "avg5": "interpolated"
+   },
+   "avg5_observed": 86.5,
+   "avg5_observed_n": 4
+  },
+  {
    "crop": "Sorghum, Grain",
    "crop_local": null,
    "season": null,
    "region": "United States",
    "metric": "harvested",
-   "current": 64.0,
-   "prev_week": 56.0,
-   "last_year": 66.6,
-   "avg5": 81.9,
+   "current": 70.0,
+   "prev_week": 64.0,
+   "last_year": 74.3,
+   "avg5": 87.9,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 85.8,
+   "avg5_observed": 91.2,
    "avg5_observed_n": 4
   },
   {
@@ -121,15 +104,15 @@
    "season": null,
    "region": "United States",
    "metric": "harvested",
-   "current": 88.0,
-   "prev_week": 79.0,
-   "last_year": 73.3,
-   "avg5": 87.9,
+   "current": 92.0,
+   "prev_week": 88.0,
+   "last_year": 84.1,
+   "avg5": 92.6,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 91.5,
+   "avg5_observed": 94.8,
    "avg5_observed_n": 4
   },
   {
@@ -138,16 +121,16 @@
    "season": null,
    "region": "United States",
    "metric": "harvested",
-   "current": 86.0,
-   "prev_week": 75.0,
-   "last_year": 75.0,
-   "avg5": 90.6,
+   "current": 90.0,
+   "prev_week": 86.0,
+   "last_year": 87.0,
+   "avg5": 94.6,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 94.5,
-   "avg5_observed_n": 4
+   "avg5_observed": null,
+   "avg5_observed_n": 2
   },
   {
    "crop": "Sunflower",
@@ -155,15 +138,15 @@
    "season": null,
    "region": "United States",
    "metric": "harvested",
-   "current": 61.0,
-   "prev_week": 46.0,
-   "last_year": 55.7,
-   "avg5": 64.9,
+   "current": 74.0,
+   "prev_week": 61.0,
+   "last_year": 66.9,
+   "avg5": 78.0,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 67.2,
+   "avg5_observed": 80.8,
    "avg5_observed_n": 4
   },
   {
@@ -172,15 +155,15 @@
    "season": null,
    "region": "United States",
    "metric": "emerged",
-   "current": 65.0,
-   "prev_week": 53.0,
-   "last_year": 60.1,
-   "avg5": 69.6,
+   "current": 76.0,
+   "prev_week": 65.0,
+   "last_year": 69.6,
+   "avg5": 77.7,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 72.0,
+   "avg5_observed": 79.8,
    "avg5_observed_n": 4
   },
   {
@@ -189,15 +172,15 @@
    "season": null,
    "region": "United States",
    "metric": "planted",
-   "current": 83.0,
-   "prev_week": 76.0,
-   "last_year": 75.4,
-   "avg5": 87.1,
+   "current": 89.0,
+   "prev_week": 83.0,
+   "last_year": 83.7,
+   "avg5": 91.5,
    "quality": {
     "last_year": "interpolated",
     "avg5": "interpolated"
    },
-   "avg5_observed": 90.0,
+   "avg5_observed": 93.5,
    "avg5_observed_n": 4
   },
   {
@@ -206,16 +189,16 @@
    "season": null,
    "region": "United States",
    "metric": "condition_ge",
-   "current": 44.0,
-   "prev_week": null,
+   "current": 49.0,
+   "prev_week": 44.0,
    "last_year": null,
-   "avg5": 41.5,
+   "avg5": 42.2,
    "dist": {
-    "ex": 6.0,
-    "fr": 38.0,
-    "gd": 38.0,
-    "pr": 13.0,
-    "vp": 5.0
+    "ex": 8.0,
+    "fr": 35.0,
+    "gd": 41.0,
+    "pr": 12.0,
+    "vp": 4.0
    }
   }
  ]
