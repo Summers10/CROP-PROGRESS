@@ -20,7 +20,7 @@ CROPS = {"MAIZ": "Corn", "MAÍZ": "Corn", "SOJA": "Soybeans", "GIRASOL": "Sunflo
          "ALGODON": "Cotton", "ALGODÓN": "Cotton", "AVENA": "Oats", "COLZA": "Canola"}
 
 HEAD_RE = re.compile(r"AVANCE\s+DE\s+(?:LA\s+)?(SIEMBRA|COSECHA)\s+DE\s+([A-ZÁÉÍÓÚÑ ]+?)\s*(?:\(|$|\n|CAMPA)", re.I)
-CAMP_RE = re.compile(r"CAMPAÑA:?\s*(\d{4})\s*/\s*(\d{4})", re.I)
+CAMP_RE = re.compile(r"CAMPAÑA:?\s*(\d{4})\s*/\s*(\d{2,4})", re.I)
 DATES_RE = re.compile(r"^(?:\d{2}/\d{2}\s*){3,}$")
 
 
