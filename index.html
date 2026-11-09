@@ -19,6 +19,7 @@ body.dark{
   --amber:#f5a623;--green:#2e8f52;--red:#b83838;
   --th-bg:#040404;--section-bg:#050505;--grp-line:#4a4034;
   --bar-bg:#1a1a1a;--bar-fill:#8a7a68;
+  --est:#8eb4d8;
 }
 body.light{
   --bg:#FFFFFF;--bg1:#F7F8FA;--bg2:#F0F1F4;--border:#E0E2E8;--border2:#C8CCD4;
@@ -26,84 +27,85 @@ body.light{
   --amber:#B8720A;--green:#0E7A3A;--red:#C4302B;
   --th-bg:#F2F3F6;--section-bg:#ECEDF0;--grp-line:#9AA1AD;
   --bar-bg:#E6E8EC;--bar-fill:#6B7280;
+  --est:#2f5f93;
 }
 
-/* black title bar, like the other terminals */
-#bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;border-bottom:2px solid #f5a623;background:#000;padding:8px 16px}
+#bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;
+  border-bottom:2px solid #f5a623;background:#000;padding:8px 16px}
 #bar h1{font-size:18px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#f5a623;white-space:nowrap}
 #bar .meta{font-size:13px;color:#6a5a4a;letter-spacing:.04em;margin-left:auto}
 .theme-toggle{display:flex;border:1px solid #1e1e1e;border-radius:3px;overflow:hidden;flex:0 0 auto}
-.theme-btn{padding:6px 13px;background:none;border:none;color:#6a5a4a;cursor:pointer;font-family:inherit;
+.theme-btn{padding:6px 12px;background:none;border:none;color:#6a5a4a;cursor:pointer;font-family:inherit;
   font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .theme-btn.active{background:#f5a623;color:#000}
 .interp-btn{padding:6px 10px;background:none;border:1px solid #3a332c;border-radius:3px;color:#d4b896;
-  cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.04em}
 .interp-btn.active{background:#f5a623;color:#000;border-color:#f5a623}
 
+.root{max-width:1280px;margin:0 auto;padding:18px 16px 28px}
 
-.root{max-width:1300px;margin:0 auto;padding:22px}
-
-/* source health strip */
-.health{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:var(--text3);margin-bottom:22px}
+.health{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--text3);margin-bottom:16px}
 .health b{color:var(--text);letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
 
-.panel{border-bottom:2px solid var(--amber);margin-bottom:24px;overflow:hidden}
-.panel-hdr{padding:9px 16px;background:var(--bg1);border:1px solid var(--border);border-bottom:none;border-top:3px solid var(--amber);
-  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+.panel{border-bottom:2px solid var(--amber);margin-bottom:22px}
+.panel-hdr{padding:9px 14px;background:var(--bg1);border:1px solid var(--border);border-bottom:none;border-top:3px solid var(--amber);
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
 .panel-title{font-size:16px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--amber)}
-.panel-sub{font-size:13px;color:var(--text3);letter-spacing:.05em}
-.panel-hdr a{font-size:12px;color:var(--text3);margin-left:auto}
-.panel-hdr a:hover{color:var(--amber)}
+.panel-sub{font-size:13px;color:var(--text3);letter-spacing:.04em}
+.src{margin-left:auto;display:flex;align-items:center;gap:8px;position:relative}
+.src a{font-size:12px;color:var(--text3)}
+.src a:hover{color:var(--amber)}
+.info{width:22px;height:22px;border:1px solid var(--border2);border-radius:50%;background:transparent;color:var(--text3);
+  font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;line-height:1}
+.info:hover,.info[aria-expanded="true"]{color:var(--amber);border-color:var(--amber)}
+.pop{position:absolute;right:0;top:calc(100% + 6px);z-index:15;width:min(340px,70vw);padding:10px 12px;
+  background:var(--bg);color:var(--text2);border:1px solid var(--border2);box-shadow:0 8px 24px rgba(0,0,0,.18);
+  font-size:12px;font-weight:600;line-height:1.45;white-space:pre-line}
 
-.tbl-wrap{overflow-x:auto}
-.cp-table{width:100%;border-collapse:collapse;border:1px solid var(--border2);background:var(--bg)}
-.cp-table th{background:var(--th-bg);padding:7px 8px;text-align:right;font-size:12.5px;font-weight:900;letter-spacing:.03em;
-  color:var(--text);border-bottom:2px solid var(--border2);white-space:nowrap;text-transform:uppercase}
-.cp-table td{padding:5px 8px;text-align:right;font-size:14px;font-weight:600;border-bottom:1px solid var(--border);
-  color:var(--text2);white-space:nowrap;background:var(--bg)}
+.cp-table{width:100%;border-collapse:collapse;border:1px solid var(--border2);background:var(--bg);table-layout:fixed;
+  font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.cp-table th{background:var(--th-bg);padding:6px 8px;text-align:right;font-size:12px;font-weight:800;letter-spacing:.04em;
+  color:var(--text);border-bottom:2px solid var(--border2);text-transform:uppercase}
+.cp-table td{padding:5px 8px;text-align:right;font-size:12px;font-weight:600;border-bottom:1px solid var(--border);
+  color:var(--text2);background:var(--bg);vertical-align:top}
 .cp-table .l{text-align:left}
 .cp-table td.name{color:var(--text);font-weight:700}
-.cp-table th.latest{color:var(--amber);border-bottom:2px solid var(--amber)}
+.cp-table th.latest{color:var(--amber);font-weight:900;border-bottom:2px solid var(--amber)}
 .cp-table td.latest{color:var(--amber);font-weight:800}
 .cp-table .grp-l{border-left:2px solid var(--grp-line)}
 .cp-table tr:hover td{background-image:linear-gradient(rgba(128,128,128,.08),rgba(128,128,128,.08))}
-.cp-table th.c-stage,.cp-table td.c-stage{width:240px}
 .row-section td{text-align:left !important;background:var(--section-bg);color:var(--text3) !important;font-size:12px !important;font-weight:900;
-  letter-spacing:.12em;text-transform:uppercase;padding:5px 10px 4px;border-top:1px solid var(--border2)}
+  letter-spacing:.12em;text-transform:uppercase;padding:6px 10px 4px;border-top:1px solid var(--border2)}
 .up{color:var(--green) !important}
 .dn{color:var(--red) !important}
 .mut{color:var(--text3)}
-body.light td.interp{background:#fff4e0;box-shadow:inset 3px 0 0 #B8720A}
-body.dark td.interp{background:#2a2112;box-shadow:inset 3px 0 0 #f5a623}
-body.light td.est{background:#e7eef6;box-shadow:inset 3px 0 0 #2f5f93}
-body.dark td.est{background:#101820;box-shadow:inset 3px 0 0 #8eb4d8}
-.interp-tag,.est-tag{display:inline-block;margin-left:6px;padding:0 4px;border:1px solid var(--amber);color:var(--amber) !important;
-  background:transparent;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
-.est-tag{border-color:#2f5f93;color:#2f5f93 !important}
-body.dark .est-tag{border-color:#8eb4d8;color:#8eb4d8 !important}
-.obs-note{display:inline-block;margin-left:6px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--text)}
-.cite{display:block;margin-top:2px;font-size:11px;font-weight:700;line-height:1.35;color:var(--text);text-decoration:underline;text-underline-offset:2px;white-space:normal}
-.cp-table td.name{white-space:normal}
-.legend-sample{display:inline-block;margin-right:8px;padding:1px 6px;font-weight:800;color:var(--text);box-shadow:inset 3px 0 0 var(--amber)}
-body.light .legend-sample{background:#fff4e0}
-body.dark .legend-sample{background:#2a2112}
-.legend-sample.est{box-shadow:inset 3px 0 0 #2f5f93}
-body.light .legend-sample.est{background:#e7eef6}
-body.dark .legend-sample.est{background:#101820;box-shadow:inset 3px 0 0 #8eb4d8}
+.fig{display:block;font-size:12px;font-weight:inherit;font-variant-numeric:tabular-nums}
+.delta{display:block;margin-top:1px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.mk{font-size:12px;font-weight:900;margin-left:1px}
+.mk.interpolated{color:var(--amber)}
+.mk.estimated{color:var(--est)}
+.yrs{font-size:12px;font-weight:700;margin-left:3px;color:var(--text3)}
 
-.bar{width:120px;height:9px;background:var(--bar-bg);position:relative;display:inline-block;vertical-align:middle}
+.bar{width:92px;height:6px;background:var(--bar-bg);position:relative;display:block;margin:5px 0 0 auto}
 .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--bar-fill)}
-.bar b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--amber)}
+.bar b{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--amber)}
+
+.detail td{text-align:left !important;padding-top:0;border-bottom:1px solid var(--border)}
+.stack{display:flex;width:100%;height:8px;background:var(--bar-bg);margin:2px 0 4px}
+.stack i{display:block;height:100%;flex:none}
+.stack .vp{background:#7a3030}.stack .pr{background:#b83838}.stack .fr{background:#b8720a}
+.stack .gd{background:#2e8f52}.stack .ex{background:#1f6b3a}
+.dist{display:block;font-size:12px;font-weight:600;color:var(--text3);line-height:1.45}
 
 .tag{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.08em;padding:1px 6px;border:1px solid;text-transform:uppercase;vertical-align:middle}
 .tag.ok{color:var(--green)} .tag.stale{color:var(--amber)} .tag.fail{color:var(--red)} .tag.beta{color:var(--text3)}
-.empty{padding:18px 16px;color:var(--text3);font-size:14px;border:1px solid var(--border2);border-top:none}
-.legend{font-size:12px;color:var(--text3);line-height:1.7;border-top:1px solid var(--border2);padding-top:10px;margin-top:8px}
+.empty{padding:16px 14px;color:var(--text3);font-size:14px;border:1px solid var(--border2);border-top:none}
+.legend{font-size:12px;color:var(--text3);line-height:1.55;border-top:1px solid var(--border2);padding-top:10px}
 
-@media (max-width:640px){
-  body{font-size:15px}
+@media (max-width:800px){
   .root{padding:14px}
   #bar .meta{display:none}
+  .tbl-scroll{overflow-x:auto}
 }
 </style>
 </head>
@@ -112,7 +114,7 @@ body.dark .legend-sample.est{background:#101820;box-shadow:inset 3px 0 0 #8eb4d8
 <div id="bar">
   <h1>Crop Progress</h1>
   <span class="meta" id="lastrun">loading…</span>
-  <button type="button" class="interp-btn" id="interp-btn" aria-pressed="false">Exclude interpolated and estimated</button>
+  <button type="button" class="interp-btn" id="interp-btn" aria-pressed="false" aria-label="Exclude interpolated and estimated values">Hide †‡</button>
   <div class="theme-toggle" id="theme"></div>
 </div>
 <div class="root" id="root"></div>
@@ -125,10 +127,11 @@ const COUNTRIES = [
   { code: "ar", name: "Argentina", short: "Argentina" },
   { code: "fr", name: "France", short: "France" },
 ];
-const CROPS = ["Wheat", "Corn", "Canola", "Soybeans", "Cotton"];
+const CROPS = ["Wheat", "Corn", "Canola", "Soybeans", "Cotton", "Rice", "Sunflower", "Peanuts"];
 const STALE_DAYS = 10;
 const METRIC_ORDER = ["planted", "emerged", "harvested", "condition_ge"];
 const METRIC_LABEL = { condition_ge: "Condition G/E", planted: "Planted", emerged: "Emerged", harvested: "Harvested" };
+const DIST_LABEL = { vp: "Very poor", pr: "Poor", fr: "Fair", gd: "Good", ex: "Excellent" };
 
 let DATA = {}, STATUS = {}, LAST_RUN = null;
 let STATE = { theme: "light", excludeInterp: false };
@@ -149,15 +152,8 @@ const MARK_TIP = {
   interpolated: "Interpolated value. It was filled linearly across a week with no published report, such as the 2025 US government shutdown. This is not an observed figure.",
   estimated: "Estimated value. The season had already finished, so the last published figure was carried forward, or the season had not started and the figure is 0. This is not an observed report for this week.",
 };
-function markClass(mark) { return mark === "estimated" ? "est" : mark === "interpolated" ? "interp" : ""; }
-function markTag(mark) {
-  if (!mark) return "";
-  const cls = mark === "estimated" ? "est-tag" : "interp-tag";
-  return ` <span class="${cls}">${mark}</span>`;
-}
 const ageDays = d => d ? Math.floor((Date.now() - new Date(d + "T12:00:00Z")) / 864e5) : null;
 
-/* Map each source's crop name to one of the five tracked crops (null = not tracked). */
 function cropGroup(name) {
   const c = String(name).toLowerCase();
   if (/silage|sweet/.test(c)) return null;
@@ -166,10 +162,12 @@ function cropGroup(name) {
   if (/canola|rapeseed|colza/.test(c)) return "Canola";
   if (/soybean|soja/.test(c)) return "Soybeans";
   if (/cotton|algod/.test(c)) return "Cotton";
+  if (/rice|arroz/.test(c)) return "Rice";
+  if (/sunflower|girasol/.test(c)) return "Sunflower";
+  if (/peanut|mani|maní/.test(c)) return "Peanuts";
   return null;
 }
 
-/* Merge source variants into one section (e.g. NASS "Corn" condition + "Corn, Grain" harvest). */
 function cropLabel(name) {
   const n = String(name).replace(/,\s*(Grain|Upland)$/i, "");
   const m = n.match(/^Wheat,\s*(\w+)$/i);
@@ -190,46 +188,35 @@ function shownValue(r, field) {
   const mark = fieldMark(r, field);
   if (field === "avg5" && STATE.excludeInterp && mark) {
     const obs = observedAvg(r);
-    const note = obs.v != null && obs.n ? `${obs.n} observed ${obs.n === 1 ? "year" : "years"}` : "";
-    return { v: obs.v, mark: null, note };
+    return { v: obs.v, mark: null, years: obs.v != null && obs.n ? obs.n : null };
   }
-  if (STATE.excludeInterp && mark) return { v: null, mark: null, note: "" };
-  return { v: r[field] == null ? null : r[field], mark, note: "" };
+  if (STATE.excludeInterp && mark) return { v: null, mark: null, years: null };
+  return { v: r[field] == null ? null : r[field], mark, years: null };
 }
 function combinedMark(a, b) {
   if (a.mark === "interpolated" || b.mark === "interpolated") return "interpolated";
   if (a.mark === "estimated" || b.mark === "estimated") return "estimated";
   return null;
 }
-function valueCell(shown, extra) {
-  const cls = [extra, markClass(shown.mark)].filter(Boolean).join(" ");
-  const tip = shown.mark ? ` title="${esc(MARK_TIP[shown.mark])}"` : "";
-  const note = shown.note ? ` <span class="obs-note">${esc(shown.note)}</span>` : "";
-  return `<td class="${cls}"${tip}>${numHtml(shown.v)}${markTag(shown.mark)}${note}</td>`;
+function marker(shown) {
+  if (!shown.mark) return "";
+  const glyph = shown.mark === "estimated" ? "‡" : "†";
+  return `<sup class="mk ${shown.mark}" title="${esc(MARK_TIP[shown.mark])}">${glyph}</sup>`;
 }
-function diffCell(a, b) {
-  if (a.v == null || b.v == null) return `<td>${NA}</td>`;
-  const d = r1(a.v - b.v);
-  const mark = combinedMark(a, b);
-  const cls = [d > 0 ? "up" : d < 0 ? "dn" : "mut", markClass(mark)].filter(Boolean).join(" ");
-  const tip = mark ? ` title="${esc(MARK_TIP[mark])}"` : "";
-  return `<td class="${cls}"${tip}>${d > 0 ? "+" : ""}${numHtml(d)}${markTag(mark)}</td>`;
+function figHtml(shown) {
+  const years = shown.years ? `<sup class="yrs" title="Average of ${shown.years} observed ${shown.years === 1 ? "year" : "years"}">${shown.years}y</sup>` : "";
+  return `<span class="fig">${numHtml(shown.v)}${marker(shown)}${years}</span>`;
+}
+function deltaHtml(cur, other) {
+  if (cur.v == null || other.v == null) return "";
+  const d = r1(cur.v - other.v);
+  const cls = d > 0 ? "up" : d < 0 ? "dn" : "mut";
+  return `<span class="delta ${cls}">${d > 0 ? "+" : ""}${numHtml(d)}</span>`;
 }
 function bar(cur, ref) {
   if (cur == null) return "";
-  const tick = ref == null ? "" : `<b style="left:${Math.min(100, ref)}%"></b>`;
-  return `<span class="bar"><i style="width:${Math.min(100, cur)}%"></i>${tick}</span>`;
-}
-function citation(r) {
-  if (!r.source_document || r.source_page == null) return "";
-  let href = r.source_document;
-  try {
-    const u = new URL(r.source_document);
-    u.hash = "page=" + r.source_page;
-    href = u.href;
-  } catch (e) {}
-  const label = r.source_label || `${r.source_document.split("/").pop()}, p. ${r.source_page}`;
-  return `<a class="cite" href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const tick = ref == null ? "" : `<b style="left:${Math.min(100, Math.max(0, ref))}%"></b>`;
+  return `<span class="bar" aria-hidden="true"><i style="width:${Math.min(100, Math.max(0, cur))}%"></i>${tick}</span>`;
 }
 function badge(code) {
   const d = DATA[code], s = STATUS[code] || {}, parts = [];
@@ -241,69 +228,85 @@ function badge(code) {
   }
   return parts.join(" ");
 }
-
-const HEAD = `<tr><th class="l c-stage">Stage</th>
-  <th class="latest grp-l">This wk</th><th>Last wk</th><th>Δ Wk</th>
-  <th class="grp-l">Last yr</th><th>vs LY</th>
-  <th class="grp-l">5-yr avg</th><th>vs Avg</th><th class="grp-l l">Progress</th></tr>`;
-
-function rowHtml(r) {
-  const cur = shownValue(r, "current");
-  const prev = shownValue(r, "prev_week");
-  const ly = shownValue(r, "last_year");
-  const avg = shownValue(r, "avg5");
-  const ref = avg.v != null ? avg : ly;
-  const refCell = ref.mark ? " " + markClass(ref.mark) : "";
-  const refTip = ref.mark ? ` title="${esc(MARK_TIP[ref.mark])}"` : "";
-  const refTag = markTag(ref.mark);
-  return `<tr><td class="l name c-stage">${esc(stageLabel(r.metric))}${citation(r)}</td>
-    ${valueCell(cur, "latest grp-l")}${valueCell(prev, "")}${diffCell(cur, prev)}
-    ${valueCell(ly, "grp-l")}${diffCell(cur, ly)}
-    ${valueCell(avg, "grp-l")}${diffCell(cur, avg)}
-    <td class="l grp-l${refCell}"${refTip}>${bar(cur.v, ref.v)}${refTag}</td></tr>`;
+function distRow(r, span) {
+  const d = r.dist;
+  if (!d) return "";
+  const keys = ["vp", "pr", "fr", "gd", "ex"].filter(k => d[k] != null);
+  if (!keys.length) return "";
+  const segs = keys.map(k => `<i class="${k}" style="width:${Math.min(100, Math.max(0, d[k]))}%"></i>`).join("");
+  const label = keys.map(k => `${DIST_LABEL[k]} ${numHtml(d[k])}`).join(" · ");
+  return `<tr class="detail"><td colspan="${span}"><span class="stack">${segs}</span><span class="dist">${label}</span></td></tr>`;
 }
 
 const mi = m => { const i = METRIC_ORDER.indexOf(m); return i < 0 ? 1.5 : i; };
 
+function sourceNotes(d, rows) {
+  const lines = (d.notes || []).map(n => String(n));
+  const cites = [];
+  for (const r of rows) {
+    if (r.source_page == null && !r.source_label) continue;
+    const where = r.source_label || `p. ${r.source_page}`;
+    cites.push(`${r._label}, ${stageLabel(r.metric)}: ${where}`);
+  }
+  if (cites.length) lines.push(cites.join("\n"));
+  return lines.join("\n\n");
+}
+
 function countryPanel(c) {
   const d = DATA[c.code], s = STATUS[c.code];
-  const hdr = (sub, link) => `<div class="panel-hdr"><span class="panel-title">${c.name}</span>
+  const hdr = (sub, link, notes) => `<div class="panel-hdr"><span class="panel-title">${c.name}</span>
     <span class="panel-sub">${sub}</span> ${badge(c.code)}
-    ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">source ↗</a>` : ""}</div>`;
+    <span class="src">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">source</a>` : ""}
+    ${notes ? `<button type="button" class="info" aria-expanded="false" aria-label="Source notes">i</button><div class="pop" hidden>${esc(notes)}</div>` : ""}
+    </span></div>`;
   if (!d) {
-    if (!s) return "";   // source not set up (e.g. Canada until v2)
+    if (!s) return "";
     return `<div class="panel">${hdr("no data yet")}<div class="empty">${esc(s.error || "Run the workflow.")}</div></div>`;
   }
   const rows = d.rows
     .map(r => ({ ...r, _g: cropGroup(r.crop), _label: cropLabel(r.crop) }))
     .filter(r => r._g)
-    .sort((a, b) => CROPS.indexOf(a._g) - CROPS.indexOf(b._g) || a._label.localeCompare(b._label)
-      || mi(a.metric) - mi(b.metric));
+    .sort((a, b) => CROPS.indexOf(a._g) - CROPS.indexOf(b._g) || a._label.localeCompare(b._label) || mi(a.metric) - mi(b.metric));
+  const cols = [{ key: "current", label: "This week" }, { key: "prev_week", label: "Prior week" }];
+  if (rows.some(r => r.last_year != null || fieldMark(r, "last_year"))) cols.push({ key: "last_year", label: "Last year" });
+  if (rows.some(r => r.avg5 != null || fieldMark(r, "avg5") || r.avg5_observed != null)) cols.push({ key: "avg5", label: "5-yr avg" });
+  const span = cols.length + 1;
+  const head = `<tr><th class="l">Stage</th>${cols.map(col => `<th class="${col.key === "current" ? "latest grp-l" : col.key === "prev_week" ? "" : "grp-l"}">${col.label}</th>`).join("")}</tr>`;
   let body = "", last = null;
   for (const r of rows) {
     if (r._label !== last) {
       const extra = [r.season, r.region && /\(/.test(r.region) ? r.region : null].filter(Boolean).join(" · ");
-      body += `<tr class="row-section"><td colspan="9">${esc(r._label)}${extra ? " · " + esc(extra) : ""}</td></tr>`;
+      body += `<tr class="row-section"><td colspan="${span}">${esc(r._label)}${extra ? " · " + esc(extra) : ""}</td></tr>`;
       last = r._label;
     }
-    body += rowHtml(r);
+    const shown = {};
+    for (const col of cols) shown[col.key] = shownValue(r, col.key);
+    const refShown = shown.avg5 && shown.avg5.v != null ? shown.avg5 : shown.last_year;
+    const cells = cols.map(col => {
+      const cell = shown[col.key];
+      const cls = [col.key === "current" ? "latest grp-l" : col.key === "prev_week" ? "" : "grp-l"].filter(Boolean).join(" ");
+      const extra = col.key === "current" ? bar(cell.v, refShown ? refShown.v : null) : deltaHtml(shown.current, cell);
+      return `<td class="${cls}">${figHtml(cell)}${extra}</td>`;
+    }).join("");
+    body += `<tr><td class="l name">${esc(stageLabel(r.metric))}</td>${cells}</tr>`;
+    body += distRow(r, span);
   }
   const table = rows.length
-    ? `<div class="tbl-wrap"><table class="cp-table">${HEAD}${body}</table></div>`
-    : `<div class="empty">No wheat, corn, canola, soybean or cotton series in this week's report.</div>`;
-  return `<div class="panel">${hdr(`${esc(d.source)} · week ending ${esc(d.report_date)}`, d.source_url)}${table}</div>`;
+    ? `<table class="cp-table">${head}${body}</table>`
+    : `<div class="empty">No wheat, corn, canola, soybean, cotton, rice, sunflower or peanut series in this week's report.</div>`;
+  const sub = `${esc(d.source)} · week ending ${esc(d.report_date)}`;
+  return `<div class="panel">${hdr(sub, d.source_url, sourceNotes(d, rows))}${table}</div>`;
 }
 
 function render() {
   const interpBtn = document.getElementById("interp-btn");
   interpBtn.classList.toggle("active", !!STATE.excludeInterp);
   interpBtn.setAttribute("aria-pressed", STATE.excludeInterp ? "true" : "false");
-  interpBtn.textContent = STATE.excludeInterp ? "Interpolated and estimated excluded" : "Exclude interpolated and estimated";
+  interpBtn.textContent = STATE.excludeInterp ? "†‡ hidden" : "Hide †‡";
   document.getElementById("theme").innerHTML = ["dark", "light"].map(t =>
     `<button type="button" class="theme-btn ${t === STATE.theme ? "active" : ""}" data-t="${t}">${t}</button>`).join("");
 
   const live = COUNTRIES.filter(c => DATA[c.code] || STATUS[c.code]);
-
   const health = live.map(c => {
     const d = DATA[c.code];
     return `<span><b>${c.short}</b>${d ? esc(d.report_date) : "not available"} ${badge(c.code)}</span>`;
@@ -311,14 +314,8 @@ function render() {
 
   document.getElementById("root").innerHTML =
     `<div class="health">${health}</div>` +
-    (live.length ? live.map(countryPanel).join("") : '<div class="empty">No data yet — run the workflow.</div>') +
-    `<footer class="legend">
-      <p>Percent of area. Condition is the share rated good or excellent. Changes are in percentage points. The amber tick marks the 5-year average, or last year when no average is published.</p>
-      <p><span class="legend-sample">12<span class="interp-tag">interpolated</span></span> An interpolated figure. The cell is shaded and outlined, the word interpolated is printed in the cell, and the tooltip names the reason. The figure was filled linearly across a week with no published report, such as the 2025 US government shutdown. It is not an observed release.</p>
-      <p><span class="legend-sample est">12<span class="est-tag">estimated</span></span> An estimated figure. The cell is shaded and outlined, the word estimated is printed in the cell, and the tooltip names the reason. The season had finished and the last published figure was carried forward, or the season had not started and the figure is 0.</p>
-      <p>Exclude interpolated and estimated values drops those figures from comparisons. If no observed comparator remains, the cell reads “not available”. A 5-year average that still has at least three observed years is recomputed from those years and labelled with the year count. Missing data reads “not available”.</p>
-      <p>Argentina rows cite the MAGyP weekly PDF and the page they were read from. That series is beta. Canola has no source yet.</p>
-    </footer>`;
+    (live.length ? live.map(countryPanel).join("") : '<div class="empty">No data yet. Run the workflow.</div>') +
+    `<footer class="legend">† interpolated: a missing week filled in a straight line, such as the 2025 US government shutdown. ‡ estimated: the last published figure carried forward after the season, or 0 before it starts. Hide †‡ drops both from comparisons. If no observed figure remains, the cell reads not available. 4y is the count of observed years in that average. Percent of area. Condition is good plus excellent. The amber tick is the 5-year average, or last year when no average is published.</footer>`;
 
   document.getElementById("lastrun").textContent = LAST_RUN ? `last run ${LAST_RUN} UTC` : "no runs yet";
 }
@@ -328,9 +325,22 @@ function setTheme(t) {
   document.body.classList.toggle("dark", t === "dark");
   document.body.classList.toggle("light", t === "light");
 }
+function closePops() {
+  document.querySelectorAll(".pop").forEach(p => { p.hidden = true; });
+  document.querySelectorAll(".info").forEach(b => b.setAttribute("aria-expanded", "false"));
+}
 
 document.addEventListener("click", e => {
   const b = e.target.closest("button");
+  if (b && b.classList.contains("info")) {
+    const pop = b.parentElement.querySelector(".pop");
+    const willOpen = pop.hidden;
+    closePops();
+    pop.hidden = !willOpen;
+    b.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    return;
+  }
+  if (!e.target.closest(".pop")) closePops();
   if (!b) return;
   if (b.dataset.t) setTheme(b.dataset.t);
   else if (b.id === "interp-btn") STATE.excludeInterp = !STATE.excludeInterp;

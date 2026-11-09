@@ -133,6 +133,22 @@ def test_magyp_source_citation():
     assert "source_page" not in ar_magyp.to_row(ar_magyp.parse_page(AR_MAIZE))
 
 
+AR_PEANUT = """AVANCE DE LA SIEMBRA DE MANI
+CAMPAÑA: 2026/27(*)
+01/10 08/10 15/10 22/10 29/10 05/11
+26/27 434.370 0 0 0,2 3 5 24
+TOTAL PAÍS
+25/26 420.277 0 0 0,6 2 16 34
+(*) Cifras Provisorias"""
+
+
+def test_magyp_peanut_short_campaign():
+    row = ar_magyp.to_row(ar_magyp.parse_page(AR_PEANUT), source_document="https://example.test/informe.pdf", source_page=24)
+    assert (row["crop"], row["metric"], row["season"]) == ("Peanuts", "planted", "2026/27")
+    assert (row["current"], row["prev_week"], row["last_year"]) == (24, 5, 34)
+    assert row["source_page"] == 24
+
+
 def test_magyp_rice_split_line():
     row = ar_magyp.to_row(ar_magyp.parse_page(AR_RICE))
     assert (row["crop"], row["current"], row["prev_week"], row["last_year"]) == ("Rice", 72, 67, 62)
@@ -265,15 +281,14 @@ def test_ui_marks_interpolated_values():
     html = (Path(__file__).resolve().parent / "index.html").read_text(encoding="utf-8")
     for phrase in (
         'lang="en-CA"',
-        "Exclude interpolated and estimated",
-        "Interpolated and estimated excluded",
+        "Hide †‡",
+        "†‡ hidden",
         "not available",
-        "interp-tag",
-        "est-tag",
         "avg5_observed",
         "Estimated value.",
         "source_page",
         "source_label",
         "2025 US government shutdown",
+        "Source notes",
     ):
         assert phrase in html, phrase

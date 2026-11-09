@@ -28,6 +28,9 @@ protection, so it can't be fetched reliably. MAGyP is the official alternative.
   every fetch, so a broken parser is caught before it touches the data.
 - **History is kept.** Every report is added to `data/history/<code>.csv`, so you build your
   own archive over time.
+- **The page does not hold its own figures.** It reads `data/<code>.json` and `data/status.json`.
+  The scheduled workflow rewrites those files. There is no manual update step for the US,
+  Brazil, France, or Argentina series, including peanut sowing once the PDF table parses.
 
 ## Setup (about 5 minutes)
 
@@ -75,14 +78,13 @@ python -m http.server  # then open http://localhost:8000
   history, matched to the same calendar week. Expect small differences (about 1 point or less)
   from the printed NASS report, which interpolates.
 - **Interpolated weeks:** a missing report week, such as the 2025 US government shutdown, is
-  filled linearly and stored as `"quality": {"last_year": "interpolated"}`. The page shades the
-  cell, prints the word “interpolated”, and adds a tooltip.
+  filled linearly and stored as `"quality": {"last_year": "interpolated"}`. The page marks the
+  figure with †.
 - **Estimated weeks:** a finished season reuses the last published figure, and a season that
-  has not started is entered as 0. Those cells are stored as `"estimated"`, shaded separately,
-  and print the word “estimated”.
-- **Exclude interpolated and estimated** drops both from comparisons. If no observed comparator
-  remains, the cell reads “not available”. When a 5-year average still has at least three
-  observed years, `avg5_observed` is that mean and `avg5_observed_n` is the year count.
+  has not started is entered as 0. Those cells are stored as `"estimated"` and marked ‡.
+- **Hide †‡** drops both from comparisons. If no observed comparator remains, the cell reads
+  “not available”. When a 5-year average still has at least three observed years,
+  `avg5_observed` is that mean and `avg5_observed_n` is the year count, shown as `4y`.
 - **Brazil and France:** last year and the 5-year average are taken directly from the agency's
   file.
 - **Argentina:** MAGyP publishes the same week of the previous campaign but no 5-year average.
