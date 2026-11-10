@@ -4,7 +4,7 @@
  "source": "USDA NASS Crop Progress",
  "source_url": "https://www.nass.usda.gov/Publications/National_Crop_Progress/",
  "report_date": "2026-11-08",
- "fetched_at": "2026-11-10T04:10:35+00:00",
+ "fetched_at": "2026-11-10T20:29:07+00:00",
  "beta": false,
  "notes": [
   "Week-ending date shown. Last year and the 5-year average are matched to the same calendar week.",
