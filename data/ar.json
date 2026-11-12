@@ -2,9 +2,9 @@
  "code": "ar",
  "country": "Argentina",
  "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
- "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
- "report_date": "2026-11-05",
- "fetched_at": "2026-11-12T03:07:45+00:00",
+ "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
+ "report_date": "2026-11-12",
+ "fetched_at": "2026-11-12T20:52:51+00:00",
  "beta": true,
  "notes": [
   "Parsed from the weekly PDF. Cross-check a figure against the cited page if it looks off.",
@@ -18,13 +18,13 @@
    "season": "2026/27",
    "region": "Argentina",
    "metric": "planted",
-   "current": 14.0,
-   "prev_week": 6.0,
-   "last_year": 13.0,
+   "current": 22.0,
+   "prev_week": 14.0,
+   "last_year": 16.0,
    "avg5": null,
-   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
    "source_page": 20,
-   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 20"
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 20"
   },
   {
    "crop": "Rice",
@@ -32,13 +32,13 @@
    "season": "2026/27",
    "region": "Argentina",
    "metric": "planted",
-   "current": 76.0,
-   "prev_week": 72.0,
-   "last_year": 79.0,
+   "current": 79.0,
+   "prev_week": 76.0,
+   "last_year": 91.0,
    "avg5": null,
-   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
    "source_page": 21,
-   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 21"
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 21"
   },
   {
    "crop": "Sunflower",
@@ -46,13 +46,13 @@
    "season": "2026/27",
    "region": "Argentina",
    "metric": "planted",
-   "current": 61.0,
-   "prev_week": 55.0,
-   "last_year": 71.0,
+   "current": 79.0,
+   "prev_week": 62.0,
+   "last_year": 82.0,
    "avg5": null,
-   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
    "source_page": 22,
-   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 22"
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 22"
   },
   {
    "crop": "Corn",
@@ -60,13 +60,13 @@
    "season": "2026/27",
    "region": "Argentina",
    "metric": "planted",
-   "current": 40.0,
-   "prev_week": 37.0,
-   "last_year": 39.0,
+   "current": 44.0,
+   "prev_week": 40.0,
+   "last_year": 42.0,
    "avg5": null,
-   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
    "source_page": 23,
-   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 23"
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 23"
   },
   {
    "crop": "Peanuts",
@@ -74,13 +74,55 @@
    "season": "2026/27",
    "region": "Argentina",
    "metric": "planted",
-   "current": 24.0,
-   "prev_week": 5.0,
-   "last_year": 34.0,
+   "current": 39.0,
+   "prev_week": 24.0,
+   "last_year": 51.0,
    "avg5": null,
-   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261105_Informe%20Semanal%20al%2005_11_2026.pdf",
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
    "source_page": 24,
-   "source_label": "Informe Semanal al 05_11_2026.pdf, p. 24"
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 24"
+  },
+  {
+   "crop": "Soybeans",
+   "crop_local": "Soja",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 19.0,
+   "prev_week": 9.0,
+   "last_year": 12.0,
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
+   "source_page": 25,
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 25"
+  },
+  {
+   "crop": "Soybeans",
+   "crop_local": "Soja",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "planted",
+   "current": 18.0,
+   "prev_week": 6.0,
+   "last_year": 14.0,
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
+   "source_page": 26,
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 26"
+  },
+  {
+   "crop": "Wheat",
+   "crop_local": "Trigo",
+   "season": "2026/27",
+   "region": "Argentina",
+   "metric": "harvested",
+   "current": 0.0,
+   "prev_week": 0.0,
+   "last_year": 15.0,
+   "avg5": null,
+   "source_document": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
+   "source_page": 27,
+   "source_label": "Informe Semanal al 12_11_2026.pdf, p. 27"
   }
  ]
 }
