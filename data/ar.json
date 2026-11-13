@@ -4,7 +4,7 @@
  "source": "MAGyP Estimaciones Agrícolas (Informe Semanal)",
  "source_url": "https://www.magyp.gob.ar/sitio/areas/estimaciones/_archivos/estimaciones/260000_2026/261100_Noviembre/261112_Informe%20Semanal%20al%2012_11_2026.pdf",
  "report_date": "2026-11-12",
- "fetched_at": "2026-11-12T20:52:51+00:00",
+ "fetched_at": "2026-11-13T02:40:42+00:00",
  "beta": true,
  "notes": [
   "Parsed from the weekly PDF. Cross-check a figure against the cited page if it looks off.",
