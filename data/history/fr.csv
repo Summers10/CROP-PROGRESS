@@ -21,3 +21,12 @@ report_date,crop,season,region,metric,current,last_year,avg5
 2026-11-02,Durum wheat,,France,emerged,1.0,4.0,3.0
 2026-11-02,Grain corn,,France,harvested,100.0,89.0,81.0
 2026-11-02,Grain corn,,France,condition_ge,22.0,59.0,
+2026-11-09,Soft wheat,,France,planted,93.0,88.0,82.0
+2026-11-09,Soft wheat,,France,emerged,62.0,67.0,63.0
+2026-11-09,Soft wheat,,France,tillering,1.0,6.0,7.0
+2026-11-09,Winter barley,,France,planted,96.0,93.0,91.0
+2026-11-09,Winter barley,,France,emerged,75.0,82.0,78.0
+2026-11-09,Winter barley,,France,tillering,1.0,10.0,13.0
+2026-11-09,Winter barley,,France,condition_ge,94.0,98.0,
+2026-11-09,Durum wheat,,France,planted,70.0,44.0,37.0
+2026-11-09,Durum wheat,,France,emerged,7.0,11.0,10.0
