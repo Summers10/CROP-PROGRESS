@@ -40,3 +40,12 @@ report_date,crop,season,region,metric,current,last_year,avg5
 2026-11-16,Winter barley,,France,condition_ge,94.0,98.0,
 2026-11-16,Durum wheat,,France,planted,82.0,68.0,56.0
 2026-11-16,Durum wheat,,France,emerged,21.0,29.0,24.0
+2026-11-23,Soft wheat,,France,planted,98.0,98.0,93.0
+2026-11-23,Soft wheat,,France,emerged,89.0,87.0,82.0
+2026-11-23,Soft wheat,,France,tillering,6.0,26.0,22.0
+2026-11-23,Soft wheat,,France,condition_ge,94.0,97.0,
+2026-11-23,Winter barley,,France,emerged,96.0,93.0,91.0
+2026-11-23,Winter barley,,France,tillering,10.0,34.0,35.0
+2026-11-23,Winter barley,,France,condition_ge,94.0,96.0,
+2026-11-23,Durum wheat,,France,planted,86.0,82.0,69.0
+2026-11-23,Durum wheat,,France,emerged,52.0,45.0,37.0
